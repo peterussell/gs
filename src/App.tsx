@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Provider } from "react-redux";
+import { MuiThemeProvider } from "@material-ui/core/styles";
+import { MainLayout } from "layouts";
+import { SnackbarProvider } from "notistack";
+import { Switch, Route } from 'react-router-dom';
 
-function App() {
+import {
+  ArticlesPage,
+  ContactPage,
+  ExamsPage,
+  HomePage,
+  NotFoundPage,
+  ResourcesPage
+} from "pages";
+
+import store from "redux/store";
+import { theme } from "styles/theme";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <main>
+      <Provider store={store}>
+        <MuiThemeProvider theme={theme}>
+          <SnackbarProvider maxSnack={3}>
+            <MainLayout>
+              <Switch>
+                <Route path="/" component={HomePage} exact />
+                <Route path="/exams" component={ExamsPage} />
+                <Route path="/articles" component={ArticlesPage} />
+                <Route path="/resources" component={ResourcesPage} />
+                <Route path="/contact" component={ContactPage} />
+                <Route component={NotFoundPage} />
+              </Switch>
+            </MainLayout>
+          </SnackbarProvider>
+        </MuiThemeProvider>
+      </Provider>
+    </main>
+  )
+};
 
 export default App;
