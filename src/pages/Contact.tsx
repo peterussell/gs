@@ -1,3 +1,9 @@
-export const ResourcesPage = () => {
-  return <span>Resources page</span>;
+import { Typography } from "@material-ui/core";
+
+export const ContactPage = () => {
+  return (
+    <>
+      <Typography variant="h4">Contact</Typography>
+    </>
+  );
 };

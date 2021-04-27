@@ -1,9 +1,9 @@
 import { Typography } from "@material-ui/core";
 
-export const ArticlesPage = () => {
+export const ExamsPage = () => {
   return (
     <>
-      <Typography variant="body1">Articles page</Typography>
+      <Typography variant="h4">Exams</Typography>
     </>
   )
 };

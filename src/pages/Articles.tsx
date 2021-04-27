@@ -1,12 +1,9 @@
 import { Typography } from "@material-ui/core";
 
-import { CourseSelector } from "features/courses/components";
-
-export const HomePage = () => {
+export const ArticlesPage = () => {
   return (
     <>
-      <Typography variant="body1">Home page</Typography>
-      <CourseSelector />
+      <Typography variant="h4">Articles</Typography>
     </>
   )
 };
