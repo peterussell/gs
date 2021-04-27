@@ -1,7 +1,6 @@
-import { Container, Grid, Typography } from "@material-ui/core";
+import { Box, Container, Grid, Typography } from "@material-ui/core";
 
 import { CourseSelector } from "features/courses/components";
-
 import useStyles from "./homeStyle";
 
 export const HomePage = () => {
@@ -17,7 +16,7 @@ export const HomePage = () => {
           </Grid>
 
           <Grid item className={classes.descriptionContainer}>
-            <Typography variant="h4" color="textSecondary" className={classes.title}>
+            <Typography variant="h5" color="textSecondary" className={classes.title}>
               Welcome to Ground School
             </Typography>
 
@@ -29,7 +28,20 @@ export const HomePage = () => {
         </Grid>
       </Container>
 
-      <CourseSelector />
+      <Container maxWidth="md">
+        <Box mt={4} mb={4}>
+          <Typography variant="h4">Practice exams</Typography>
+          <Typography variant="body1">
+            <p>
+            GroundSchool question banks are crowd-sourced from generous contributors in the
+            kiwi pilot community. 
+            The exam simulator lets you practice sitting a full ASPEQ-style exam, or select a smaller
+            number of questions for quick review.
+            </p>
+          </Typography>
+        </Box>
+        <CourseSelector />
+      </Container>
     </>
   )
 };

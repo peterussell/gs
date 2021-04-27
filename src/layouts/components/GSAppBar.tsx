@@ -24,7 +24,7 @@ export const GSAppBar = () => {
           <div className={classes.menuContainer}>
             <List className={classes.menuList}>
               <ListItem className={classes.menuItem} button component="a" href="/">
-                <ListItemText primary="Home" />
+                <ListItemText primary="Exams" />
               </ListItem>
 
               <ListItem className={classes.menuItem} button component="a" href="/articles">
