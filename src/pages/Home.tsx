@@ -13,7 +13,7 @@ export const HomePage = () => {
         <Grid container justify="center" alignItems="center">
 
           <Grid item className={classes.logoContainer}>
-            <img src="/landing-page/groundschoolnz-logo-200.png" />
+            <img src="/landing-page/groundschoolnz-logo-200.png" alt="GroundSchool NZ" />
           </Grid>
 
           <Grid item className={classes.descriptionContainer}>
