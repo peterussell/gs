@@ -1,8 +1,9 @@
-import { LicenseType } from "models";
+import { ExamInfo } from "models";
 
 export interface CourseResponse {
   id: string,
-  name: string,
-  licenseType: LicenseType,
-  numberOfQuestions: number
+  title: string,
+  slug: string,
+  numberOfQuestions: number,
+  examInfo: ExamInfo
 };

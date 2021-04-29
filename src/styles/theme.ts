@@ -10,6 +10,9 @@ export const theme = createMuiTheme({
       contrastText: "#fff",
       light: "#fff",
     },
+    secondary: {
+      main: "rgb(57 89 114)"
+    },
     success: {
       main: "#0e0" // placeholder
     },

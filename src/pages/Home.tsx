@@ -12,7 +12,7 @@ export const HomePage = () => {
         <Grid container justify="center" alignItems="center">
 
           <Grid item className={classes.logoContainer}>
-            <img src="/landing-page/groundschoolnz-logo-200.png" alt="GroundSchool NZ" />
+            <img src="/images/landing-page/groundschoolnz-logo-200.png" alt="GroundSchool NZ" />
           </Grid>
 
           <Grid item className={classes.descriptionContainer}>
@@ -31,14 +31,19 @@ export const HomePage = () => {
       <Container maxWidth="md">
         <Box mt={4} mb={4}>
           <Typography variant="h4">Practice exams</Typography>
-          <Typography variant="body1">
-            <p>
-            GroundSchool question banks are crowd-sourced from generous contributors in the
-            kiwi pilot community. 
-            The exam simulator lets you practice sitting a full ASPEQ-style exam, or select a smaller
-            number of questions for quick review.
-            </p>
-          </Typography>
+
+            <Box mt={2}>
+            <Grid container>
+              <Grid item md={10}>
+                <Typography variant="body1">
+                  GroundSchool question banks are crowd-sourced from the
+                  kiwi pilot community. Use the exam simulator to practice sitting a full ASPEQ-style
+                  exam, or select a smaller number of questions for quick review.
+                </Typography>
+              </Grid>
+            </Grid>
+          </Box>
+          
         </Box>
         <CourseSelector />
       </Container>

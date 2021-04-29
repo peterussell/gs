@@ -3,7 +3,7 @@ import { Theme, makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme: Theme) => ({
   headerContainer: {
     height: "auto",
-    backgroundImage: "url('/landing-page/background.jpg')",
+    backgroundImage: "url('/images/landing-page/background.jpg')",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPositionY: -240
