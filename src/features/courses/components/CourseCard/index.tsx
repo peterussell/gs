@@ -42,7 +42,7 @@ export const CourseCard = ({ course, onClick }: Props) => {
               <Grid item xs={12}>
                 <School className={classes.icon} />
                 <Typography variant="body2" color="secondary">
-                  Exam: {course.examInfo.durationMinutes} minutes / {course.examInfo.numberOfQuestions} questions
+                  Exam: {course.examInfo.durationMinutes} min / {course.examInfo.numberOfQuestions} questions
                 </Typography>
               </Grid>
             </Grid>

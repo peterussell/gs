@@ -32,11 +32,11 @@ export const GSDialog = ({
         <DialogContentText>{children}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button color="primary" variant="outlined" onClick={onSave}>
-          { saveText ? saveText : "Save" }
-        </Button>
         <Button onClick={onCancel}>
           Cancel
+        </Button>
+        <Button color="primary" variant="outlined" onClick={onSave}>
+          { saveText ? saveText : "Save" }
         </Button>
       </DialogActions>
     </Dialog>
