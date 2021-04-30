@@ -76,7 +76,7 @@ export const CourseSelector = () => {
 
       {selectedCourse &&
         <GSDialog
-          title="Generate practice exam"
+          title={`Practice exam: ${selectedCourse.title}`}
           open={showDialog}
           saveText="Start exam"
           onSave={handleStartExam}
