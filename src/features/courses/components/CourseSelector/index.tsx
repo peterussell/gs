@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 import {
   Box,
   Grid,
@@ -21,7 +21,7 @@ export const CourseSelector = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
 
-  const handleTabChange = (event: ChangeEvent<{}>, newValue: number) => {
+  const handleTabChange = (_: any, newValue: number) => {
     setTabIndex(newValue);
   };
 
@@ -76,11 +76,13 @@ export const CourseSelector = () => {
 
       {selectedCourse &&
         <GSDialog
-          title="Practice exam settings"
+          title="Generate practice exam"
           open={showDialog}
           saveText="Start exam"
           onSave={handleStartExam}
           onCancel={handleCancel}
+          fullWidth
+          maxWidth="sm"
         >
           <ExamConfigurator course={selectedCourse} />
         </GSDialog>

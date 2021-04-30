@@ -20,7 +20,7 @@ export const theme = createMuiTheme({
       main: "#0e0" // placeholder
     },
     error: {
-      main: "#0e0" // placeholder
+      main: "#c00"
     },
     text: {
       primary: "#333",

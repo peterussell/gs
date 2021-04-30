@@ -2,13 +2,15 @@ import React from "react";
 import {
   Button,
   Dialog,
+  DialogProps,
   DialogActions,
   DialogTitle,
-  DialogContent,
-  DialogContentText
+  DialogContent
 } from "@material-ui/core";
 
-interface Props {
+import useStyles from "./gsDialogStyle";
+
+interface CustomProps {
   children?: React.ReactNode,
   onCancel: () => void
   onSave: () => void,
@@ -17,20 +19,23 @@ interface Props {
   title: string
 };
 
+type Props = CustomProps & DialogProps;
+
 export const GSDialog = ({
   children,
   onCancel,
   onSave,
   open,
   saveText,
-  title
+  title,
+  ...props
 }: Props) => {
+  const classes = useStyles();
+
   return (
-    <Dialog open={open}>
-      <DialogTitle>{title}</DialogTitle>
-      <DialogContent>
-        <DialogContentText>{children}</DialogContentText>
-      </DialogContent>
+    <Dialog open={open} {...props}>
+      <DialogTitle className={classes.titleBar}>{title}</DialogTitle>
+      <DialogContent className={classes.contentContainer}>{children}</DialogContent>
       <DialogActions>
         <Button onClick={onCancel}>
           Cancel
