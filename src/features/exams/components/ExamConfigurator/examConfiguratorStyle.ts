@@ -22,6 +22,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   cursor: {
     cursor: "pointer"
+  },
+  actionsContainer: {
+    paddingTop: 20,
+    paddingRight: 20
   }
 }));
 

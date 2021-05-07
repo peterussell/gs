@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  Button,
   Grid,
   Switch,
   TextField,
@@ -7,12 +8,16 @@ import {
   Typography
 } from "@material-ui/core";
 
-import { Course } from "models";
+import { Course, ExamSimulatorConfig } from "models";
 import useStyles from "./examConfiguratorStyle";
 
-interface Props { course: Course };
+interface Props {
+  course: Course,
+  onCancel: () => void,
+  onStartExam: (config: ExamSimulatorConfig) => void
+};
 
-export const ExamConfigurator = ({ course }: Props) => {
+export const ExamConfigurator = ({ course, onCancel, onStartExam }: Props) => {
   const classes = useStyles();
 
   const canSimulateAspeqExam = course.numberOfQuestions >= course.examInfo.numberOfQuestions;
@@ -61,8 +66,16 @@ export const ExamConfigurator = ({ course }: Props) => {
     setIsTimed(e.target.checked);
   };
 
-  const cantSimText = "This course doesn't have enough questions to simulate an exam yet. " +
-                      "You can help by contributing questions to the question bank.";
+  const handleStartExam = () => {
+    onStartExam({
+      courseId: course.id,
+      duration: duration,
+      isTimed: isTimed,
+      numberOfQuestions: numQuestions
+    });
+  };
+
+  const cantSimText = "There aren't enough questions to simulate a full exam yet.";
   return (
     <>
       <Grid container spacing={1} className={classes.bodyContainer}>
@@ -118,6 +131,19 @@ export const ExamConfigurator = ({ course }: Props) => {
               ({numQuestions} questions, {duration} minutes)
             </Typography>
           )}
+        </Grid>
+
+        <Grid item xs={12}>
+          <Grid container spacing={2} justify="flex-end" className={classes.actionsContainer}>
+            <Grid item>
+              <Button onClick={onCancel}>Cancel</Button>
+            </Grid>
+            <Grid item>
+              <Button color="primary" variant="outlined" onClick={handleStartExam}>
+                Start Exam
+              </Button>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </>

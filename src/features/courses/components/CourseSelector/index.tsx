@@ -1,4 +1,6 @@
+
 import { ReactNode, useState } from "react";
+import { Redirect } from "react-router-dom";
 import {
   Box,
   Grid,
@@ -7,19 +9,24 @@ import {
   Typography
 } from "@material-ui/core";
 
-import { Course } from "models";
+import { Course, ExamSimulatorConfig } from "models";
+import { useExamState } from "features/exams/store";
+
 import { CourseCard } from "features/courses/components";
 import { ExamConfigurator } from "features/exams/components";
 import { GSDialog } from "features/shared/components";
 import useStyles from "./courseSelectorStyle";
 
-import { pplCourses } from "mocks";
+import { pplCourses } from "mocks"; // tmp
 
 export const CourseSelector = () => {
   const classes = useStyles();
+  const { setExamConfig } = useExamState();
+
   const [tabIndex, setTabIndex] = useState(0);
   const [showDialog, setShowDialog] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
+  const [redirect, setRedirect] = useState<string | null>(null);
 
   const handleTabChange = (_: any, newValue: number) => {
     setTabIndex(newValue);
@@ -30,14 +37,19 @@ export const CourseSelector = () => {
     setShowDialog(true);
   };
 
-  const handleStartExam = () => {
-    console.log('starting exam');
+  const handleStartExam = (config: ExamSimulatorConfig) => {
+    setExamConfig(config);
+    setRedirect("/exams/sit");
   };
 
   const handleCancel = () => {
     setShowDialog(false);
     setSelectedCourse(null);
   };
+
+  if (redirect) {
+    return <Redirect push to={redirect} />;
+  }
 
   return (
     <>
@@ -51,7 +63,7 @@ export const CourseSelector = () => {
       <Grid container className={classes.tabPanelContainer}>
         <Grid item xs={12}>
           <TabPanel value={tabIndex} index={0}>
-            <Grid container spacing={2}>
+            <Grid container spacing={4}>
               {pplCourses.map(c => (
                 <Grid item xs={4} key={c.id}>
                   <CourseCard course={c} onClick={(c: Course) => { handleCardClick(c); }} />
@@ -79,16 +91,18 @@ export const CourseSelector = () => {
           title={`Practice exam: ${selectedCourse.title}`}
           open={showDialog}
           saveText="Start exam"
-          onSave={handleStartExam}
-          onCancel={handleCancel}
           fullWidth
           maxWidth="sm"
         >
-          <ExamConfigurator course={selectedCourse} />
+          <ExamConfigurator
+            course={selectedCourse}
+            onCancel={handleCancel}
+            onStartExam={handleStartExam}
+          />
         </GSDialog>
       }
     </>
-  )
+  );
 };
 
 interface TabPanelProps {

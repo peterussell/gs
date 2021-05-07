@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsLoading, selectAllCourses } from "./coursesSelector";
 import { fetchCourses } from "./coursesSlice";
 
-export const useContactNotesState = () => {
+export const useCoursesState = () => {
   const dispatch = useDispatch();
 
   const isLoading = useSelector(selectIsLoading);
