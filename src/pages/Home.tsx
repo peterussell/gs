@@ -1,7 +1,7 @@
-import { Box, Container, Grid, Typography } from "@material-ui/core";
+import { Container, Grid, Typography } from "@material-ui/core";
 
-import { CourseSelector } from "features/courses/components";
-import useStyles from "./homeStyle";
+import { ExamSelector } from "features/exams/components";
+import useStyles from "./pagesStyle";
 
 export const HomePage = () => {
   const classes = useStyles();
@@ -28,24 +28,8 @@ export const HomePage = () => {
         </Grid>
       </Container>
 
-      <Container maxWidth="md">
-        <Box mt={4} mb={4}>
-          <Typography variant="h4">Practice exams</Typography>
-
-            <Box mt={2}>
-            <Grid container>
-              <Grid item md={10}>
-                <Typography variant="body1">
-                  GroundSchool question banks are crowd-sourced from the
-                  kiwi pilot community. Use the exam simulator to practice sitting a full ASPEQ-style
-                  exam, or select a smaller number of questions for quick review.
-                </Typography>
-              </Grid>
-            </Grid>
-          </Box>
-          
-        </Box>
-        <CourseSelector />
+      <Container maxWidth="md" className={classes.bodyContainer}>
+        <ExamSelector />
       </Container>
     </>
   )

@@ -1,18 +1,19 @@
-import { Typography } from "@material-ui/core";
+import { Container, Typography } from "@material-ui/core";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
-import { ExamSimulator } from "features/exams/components";
+import { ExamSelector, ExamSimulator } from "features/exams/components";
+import useStyles from "./pagesStyle";
 
 export const ExamsPage = () => {
+  const classes = useStyles();
   const { url } = useRouteMatch();
 
   return (
-    <>
-      <Typography variant="h4">Exam</Typography>
-
+    <Container maxWidth="md" className={classes.bodyContainer}>
       <Switch>
+        <Route path="/" component={ExamSelector} exact />
         <Route path={`${url}/sit`} component={ExamSimulator} />
       </Switch>
-    </>
+    </Container>
   )
 };

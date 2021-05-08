@@ -13,14 +13,14 @@ import {
 } from "@material-ui/icons";
 
 import { Course } from "models";
-import useStyles from "./courseCardStyle";
+import useStyles from "./examSelectorCardStyle";
 
 interface Props {
   course: Course,
   onClick?: (c: Course) => void
 };
 
-export const CourseCard = ({ course, onClick }: Props) => {
+export const ExamSelectorCard = ({ course, onClick }: Props) => {
   const classes = useStyles();
 
   return (

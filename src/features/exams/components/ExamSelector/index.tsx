@@ -12,14 +12,13 @@ import {
 import { Course, ExamSimulatorConfig } from "models";
 import { useExamState } from "features/exams/store";
 
-import { CourseCard } from "features/courses/components";
-import { ExamConfigurator } from "features/exams/components";
+import { ExamConfigurator, ExamSelectorCard } from "features/exams/components";
 import { GSDialog } from "features/shared/components";
-import useStyles from "./courseSelectorStyle";
+import useStyles from "./examSelectorStyle";
 
 import { pplCourses } from "mocks"; // tmp
 
-export const CourseSelector = () => {
+export const ExamSelector = () => {
   const classes = useStyles();
   const { setExamConfig } = useExamState();
 
@@ -53,6 +52,20 @@ export const CourseSelector = () => {
 
   return (
     <>
+     <Typography variant="h4">Practice exams</Typography>
+
+      <Box mt={2} mb={3}>
+        <Grid container>
+          <Grid item md={10}>
+            <Typography variant="body1">
+              GroundSchool question banks are crowd-sourced from the
+              kiwi pilot community. Use the exam simulator to practice sitting a full ASPEQ-style
+              exam, or select a smaller number of questions for quick review.
+            </Typography>
+          </Grid>
+        </Grid>
+      </Box>
+
       <Tabs value={tabIndex} onChange={handleTabChange} indicatorColor="primary">
         <Tab label="PPL" id="tab-0" className={tabIndex !== 0 ? classes.inactiveTab : undefined} />
         <Tab label="CPL" id="tab-1" className={tabIndex !== 1 ? classes.inactiveTab : undefined} />
@@ -66,7 +79,7 @@ export const CourseSelector = () => {
             <Grid container spacing={4}>
               {pplCourses.map(c => (
                 <Grid item xs={4} key={c.id}>
-                  <CourseCard course={c} onClick={(c: Course) => { handleCardClick(c); }} />
+                  <ExamSelectorCard course={c} onClick={(c: Course) => { handleCardClick(c); }} />
                 </Grid>
               ))}
             </Grid>

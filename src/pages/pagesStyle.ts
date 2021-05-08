@@ -20,6 +20,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   description: {
     fontSize: "1.2rem"
+  },
+  bodyContainer: {
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4)
   }
 }));
 
