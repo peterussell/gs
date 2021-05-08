@@ -1,32 +1,49 @@
-import { useState } from "react";
-import { Typography } from "@material-ui/core";
+import { useEffect } from "react";
+import { Box, Typography } from "@material-ui/core";
 
 import { Redirect } from "react-router-dom";
 import { ProgressIndicator } from "./ProgressIndicator";
 import { useExamState } from "features/exams/store";
-import useStyles from "./examSimulatorStyle";
-
-import { examQuestions } from "mocks"; // tmp
+import { useStringUtils } from "utils";
 
 interface Props {};
 
 export const ExamSimulator = ({}: Props) => {
-  const classes = useStyles();
+  const { capitalize } = useStringUtils();
 
-  const { examConfig: config } = useExamState();
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const {
+    currentQuestionIndex,
+    exam,
+    examConfig,
+    loadExam,
+    setCurrentQuestionIndex
+  } = useExamState();
 
-  if (!config) {
+  useEffect(() => {
+    examConfig && loadExam(examConfig);
+  }, [examConfig]);
+
+  if (!examConfig) {
     return <Redirect push to="/exams" />
   }
 
   return (
-    <>
-      <ProgressIndicator
-        questions={examQuestions}
-        currentQuestionIndex={currentIndex}
-        onQuestionChange={(newIndex: number) => { setCurrentIndex(newIndex); }}
-      />
-    </>
+    !exam?.questions?.length ? (
+      <Typography variant="h5">Loading exam...</Typography>
+    ) : (
+      <>
+        <Typography variant="h4">
+          {`${capitalize(exam.licenseType)} ${exam.name} (Question ${currentQuestionIndex+1}/${exam.questions.length})`}
+        </Typography>
+
+        <Box mt={3}>
+          <ProgressIndicator
+            questions={exam.questions}
+            currentQuestionIndex={currentQuestionIndex}
+            onQuestionChange={(newIndex: number) => { setCurrentQuestionIndex(newIndex); }}
+          />
+        </Box>
+      </>
+    )
   )
 };

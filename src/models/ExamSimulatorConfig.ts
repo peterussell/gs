@@ -1,5 +1,5 @@
 export interface ExamSimulatorConfig {
-  courseId: string,
+  examId: string,
   duration: number,
   isTimed: boolean,
   numberOfQuestions: number

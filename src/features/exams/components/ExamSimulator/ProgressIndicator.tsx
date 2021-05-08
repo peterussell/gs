@@ -30,7 +30,7 @@ export const ProgressIndicator = ({
 
     return (
       <Chip 
-        label={questionIndex}
+        label={questionIndex+1}
         className={`${classes.progressChip} ${chipClass}`}
         onClick={() => { onQuestionChange(questionIndex); }}
       />

@@ -9,7 +9,7 @@ import {
   Typography
 } from "@material-ui/core";
 
-import { Course, ExamSimulatorConfig } from "models";
+import { Exam, ExamSimulatorConfig } from "models";
 import { useExamState } from "features/exams/store";
 
 import { ExamConfigurator, ExamSelectorCard } from "features/exams/components";
@@ -26,14 +26,14 @@ export const ExamSelector = () => {
 
   const [tabIndex, setTabIndex] = useState(0);
   const [showDialog, setShowDialog] = useState(false);
-  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
+  const [selectedExam, setSelectedExam] = useState<Exam | null>(null);
 
   const handleTabChange = (_: any, newValue: number) => {
     setTabIndex(newValue);
   };
 
-  const handleCardClick = (course: Course) => {
-    setSelectedCourse(course);
+  const handleCardClick = (exam: Exam) => {
+    setSelectedExam(exam);
     setShowDialog(true);
   };
 
@@ -44,7 +44,7 @@ export const ExamSelector = () => {
 
   const handleCancel = () => {
     setShowDialog(false);
-    setSelectedCourse(null);
+    setSelectedExam(null);
   };
 
   if (redirect) {
@@ -78,9 +78,9 @@ export const ExamSelector = () => {
         <Grid item xs={12}>
           <TabPanel value={tabIndex} index={0}>
             <Grid container spacing={4}>
-              {pplExams.map(c => (
-                <Grid item xs={4} key={c.id}>
-                  <ExamSelectorCard course={c} onClick={(c: Course) => { handleCardClick(c); }} />
+              {pplExams.map(e => (
+                <Grid item xs={4} key={e.id}>
+                  <ExamSelectorCard exam={e} onClick={(e: Exam) => { handleCardClick(e); }} />
                 </Grid>
               ))}
             </Grid>
@@ -100,16 +100,16 @@ export const ExamSelector = () => {
         </Grid>
       </Grid>
 
-      {selectedCourse &&
+      {selectedExam &&
         <GSDialog
-          title={`Practice exam: ${selectedCourse.title}`}
+          title={`Practice exam: ${selectedExam.name}`}
           open={showDialog}
           saveText="Start exam"
           fullWidth
           maxWidth="sm"
         >
           <ExamConfigurator
-            course={selectedCourse}
+            exam={selectedExam}
             onCancel={handleCancel}
             onStartExam={handleStartExam}
           />

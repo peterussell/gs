@@ -15,7 +15,7 @@ export const theme = createMuiTheme({
       contrastText: "#fff",
     },
     success: {
-      main: "#0e0" // placeholder
+      main: "#53a653"
     },
     warning: {
       main: "#0e0" // placeholder

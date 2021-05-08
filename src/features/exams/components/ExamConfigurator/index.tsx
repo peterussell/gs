@@ -8,24 +8,24 @@ import {
   Typography
 } from "@material-ui/core";
 
-import { Course, ExamSimulatorConfig } from "models";
+import { Exam, ExamSimulatorConfig } from "models";
 import useStyles from "./examConfiguratorStyle";
 
 interface Props {
-  course: Course,
+  exam: Exam,
   onCancel: () => void,
   onStartExam: (config: ExamSimulatorConfig) => void
 };
 
-export const ExamConfigurator = ({ course, onCancel, onStartExam }: Props) => {
+export const ExamConfigurator = ({ exam, onCancel, onStartExam }: Props) => {
   const classes = useStyles();
 
-  const canSimulateAspeqExam = course.numberOfQuestions >= course.examInfo.numberOfQuestions;
+  const canSimulateAspeqExam = exam.availableQuestions >= (exam.aspeqExamInfo?.numberOfQuestions || 0);
 
   const [simulateAspeq, setSimulateAspeq] = useState(canSimulateAspeqExam);
-  const [numQuestions, setNumQuestions] = useState(course.numberOfQuestions);
+  const [numQuestions, setNumQuestions] = useState(exam.availableQuestions);
   const [isTimed, setIsTimed] = useState(true);
-  const [duration, setDuration] = useState(course.examInfo.durationMinutes);
+  const [duration, setDuration] = useState(exam.aspeqExamInfo.durationMinutes);
   const [numQuestionsError, setNumQuestionsError] = useState<string | null>(null);
 
   const handleSimulateExamChange = (e: any) => {
@@ -33,8 +33,8 @@ export const ExamConfigurator = ({ course, onCancel, onStartExam }: Props) => {
     setSimulateAspeq(simulate);
 
     if (simulate) {
-      setNumQuestions(course.examInfo.numberOfQuestions);
-      setDuration(course.examInfo.durationMinutes);
+      setNumQuestions(exam.aspeqExamInfo.numberOfQuestions);
+      setDuration(exam.aspeqExamInfo.durationMinutes);
       setIsTimed(true);
     }
   };
@@ -50,15 +50,15 @@ export const ExamConfigurator = ({ course, onCancel, onStartExam }: Props) => {
     updateDuration(numVal);
 
     // Set errors if applicable
-    if (numVal < 1 || numVal > course.numberOfQuestions) {
-      setNumQuestionsError(`1-${course.numberOfQuestions}`);
+    if (numVal < 1 || numVal > exam.availableQuestions) {
+      setNumQuestionsError(`1-${exam.availableQuestions}`);
     }
   };
 
   const updateDuration = (n: number) => {
-    const { examInfo: ei } = course;
+    const { aspeqExamInfo } = exam;
     setDuration(Math.ceil(
-      (ei.durationMinutes / ei.numberOfQuestions) * n
+      (aspeqExamInfo.durationMinutes / aspeqExamInfo.numberOfQuestions) * n
     ));
   };
 
@@ -68,7 +68,7 @@ export const ExamConfigurator = ({ course, onCancel, onStartExam }: Props) => {
 
   const handleStartExam = () => {
     onStartExam({
-      courseId: course.id,
+      examId: exam.id,
       duration: duration,
       isTimed: isTimed,
       numberOfQuestions: numQuestions

@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.primary.contrastText
   },
   answered: {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.success.main,
     color: theme.palette.secondary.contrastText
   }
 }));

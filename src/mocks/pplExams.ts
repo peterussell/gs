@@ -1,25 +1,27 @@
-import { Course } from "models";
+import { Exam } from "models";
 
-export const pplExams: Course[] = [
+export const pplExams: Exam[] = [
   {
     id: "1",
-    title: "Air Law",
+    name: "Air Law",
+    licenseType: "ppl",
     slug: "air-law",
-    numberOfQuestions: 76,
-    examInfo: {
-      name: "PPL Air Law (Aeroplane)",
+    availableQuestions: 76,
+    aspeqName: "PPL Air Law (Aeroplane)",
+    aspeqExamInfo: {
       durationMinutes: 70,
       numberOfQuestions: 35,
       allowedMaterials: []
-   }
+    }
   },
   {
     id: "2",
-    title: "Air Tech",
+    name: "Air Tech",
+    licenseType: "ppl",
     slug: "air-tech",
-    numberOfQuestions: 36,
-    examInfo: {
-      name: "PPL Aircraft Technical Knowledge (Aeroplane)",
+    availableQuestions: 36,
+    aspeqName: "PPL Aircraft Technical Knowledge (Aeroplane)",
+    aspeqExamInfo: {
       durationMinutes: 90,
       numberOfQuestions: 45,
       allowedMaterials: []
@@ -27,11 +29,12 @@ export const pplExams: Course[] = [
   },
   {
     id: "3",
-    title: "Flight Radio",
+    name: "Flight Radio",
     slug: "flight-radio",
-    numberOfQuestions: 120,
-    examInfo: {
-      name: "FRTO Flight Radio",
+    licenseType: "ppl",
+    availableQuestions: 120,
+    aspeqName: "FRTO Flight Radio",
+    aspeqExamInfo: {
       durationMinutes: 40,
       numberOfQuestions: 25,
       allowedMaterials: []
@@ -39,11 +42,12 @@ export const pplExams: Course[] = [
   },
   {
     id: "4",
-    title: "Human Factors",
+    name: "Human Factors",
+    licenseType: "ppl",
     slug: "human-factors",
-    numberOfQuestions: 96,
-    examInfo: {
-      name: "PPL Human Factors",
+    availableQuestions: 96,
+    aspeqName: "PPL Human Factors",
+    aspeqExamInfo: {
       durationMinutes: 40,
       numberOfQuestions: 35,
       allowedMaterials: []
@@ -51,11 +55,12 @@ export const pplExams: Course[] = [
   },
   {
     id: "5",
-    title: "Meteorology",
+    name: "Meteorology",
+    licenseType: "ppl",
     slug: "meteorology",
-    numberOfQuestions: 10,
-    examInfo: {
-      name: "PPL Meteorology",
+    availableQuestions: 10,
+    aspeqName: "PPL Meteorology",
+    aspeqExamInfo: {
       durationMinutes: 70,
       numberOfQuestions: 35,
       allowedMaterials: []
@@ -63,11 +68,12 @@ export const pplExams: Course[] = [
   },
   {
     id: "6",
-    title: "Nav & Flight Planning",
-    slug: "nav",
-    numberOfQuestions: 84,
-    examInfo: {
-      name: "PPL Air Navigation and Flight Planning",
+    name: "Nav & Flight Planning",
+    licenseType: "ppl",
+    slug: "nav-flight-planning",
+    availableQuestions: 84,
+    aspeqName: "PPL Air Navigation and Flight Planning",
+    aspeqExamInfo: {
       durationMinutes: 70,
       numberOfQuestions: 25,
       allowedMaterials: []
