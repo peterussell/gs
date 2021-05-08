@@ -1,6 +1,6 @@
 import { Course } from "models";
 
-export const pplCourses: Course[] = [
+export const pplExams: Course[] = [
   {
     id: "1",
     title: "Air Law",

@@ -1,26 +1,32 @@
+import { useState } from "react";
 import { Typography } from "@material-ui/core";
 
+import { Redirect } from "react-router-dom";
+import { ProgressIndicator } from "./ProgressIndicator";
 import { useExamState } from "features/exams/store";
-
 import useStyles from "./examSimulatorStyle";
+
+import { examQuestions } from "mocks"; // tmp
 
 interface Props {};
 
 export const ExamSimulator = ({}: Props) => {
   const classes = useStyles();
+
   const { examConfig: config } = useExamState();
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   if (!config) {
-    return <Typography variant="body1">No configuration found</Typography>
+    return <Redirect push to="/exams" />
   }
 
   return (
     <>
-      <Typography variant="h5">Exam simulator</Typography>
-      <Typography variant="body1">Course ID: {config.courseId}</Typography>
-      <Typography variant="body1">Questions: {config.numberOfQuestions}</Typography>
-      <Typography variant="body1">Duration: {config.duration}</Typography>
-      <Typography variant="body1">Is timed: {config.isTimed ? "yes" : "no"}</Typography>
+      <ProgressIndicator
+        questions={examQuestions}
+        currentQuestionIndex={currentIndex}
+        onQuestionChange={(newIndex: number) => { setCurrentIndex(newIndex); }}
+      />
     </>
   )
 };

@@ -1,8 +1,10 @@
-import { ExamAnswer } from ".";
+import { ExamAnswer, ExamQuestionStatus } from ".";
 
 export interface ExamQuestion {
   id: string,
   text: string,
   answers: ExamAnswer[],
-  selectedAnswer: ExamAnswer
+  assetPaths?: string[]
+  selectedAnswerId?: string,
+  status: ExamQuestionStatus
 };

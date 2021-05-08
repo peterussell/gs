@@ -16,16 +16,17 @@ import { ExamConfigurator, ExamSelectorCard } from "features/exams/components";
 import { GSDialog } from "features/shared/components";
 import useStyles from "./examSelectorStyle";
 
-import { pplCourses } from "mocks"; // tmp
+import { pplExams } from "mocks"; // tmp
 
 export const ExamSelector = () => {
   const classes = useStyles();
+  const [redirect, setRedirect] = useState<string | null>(null);
+
   const { setExamConfig } = useExamState();
 
   const [tabIndex, setTabIndex] = useState(0);
   const [showDialog, setShowDialog] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
-  const [redirect, setRedirect] = useState<string | null>(null);
 
   const handleTabChange = (_: any, newValue: number) => {
     setTabIndex(newValue);
@@ -77,7 +78,7 @@ export const ExamSelector = () => {
         <Grid item xs={12}>
           <TabPanel value={tabIndex} index={0}>
             <Grid container spacing={4}>
-              {pplCourses.map(c => (
+              {pplExams.map(c => (
                 <Grid item xs={4} key={c.id}>
                   <ExamSelectorCard course={c} onClick={(c: Course) => { handleCardClick(c); }} />
                 </Grid>
