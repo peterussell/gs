@@ -3,12 +3,15 @@ import { Box, Typography } from "@material-ui/core";
 
 import { Redirect } from "react-router-dom";
 import { ProgressIndicator } from "./ProgressIndicator";
+import { QuestionViewer } from "./QuestionViewer";
 import { useExamState } from "features/exams/store";
 import { useStringUtils } from "utils";
+import useStyles from "./examSimulatorStyle";
 
 interface Props {};
 
 export const ExamSimulator = ({}: Props) => {
+  const classes = useStyles();
   const { capitalize } = useStringUtils();
 
   const {
@@ -33,7 +36,7 @@ export const ExamSimulator = ({}: Props) => {
     ) : (
       <>
         <Typography variant="h4">
-          {`${capitalize(exam.licenseType)} ${exam.name} (Question ${currentQuestionIndex+1}/${exam.questions.length})`}
+          {`${capitalize(exam.licenseType)} ${exam.name}`}
         </Typography>
 
         <Box mt={3}>
@@ -42,6 +45,10 @@ export const ExamSimulator = ({}: Props) => {
             currentQuestionIndex={currentQuestionIndex}
             onQuestionChange={(newIndex: number) => { setCurrentQuestionIndex(newIndex); }}
           />
+        </Box>
+
+        <Box mt={4} className={classes.questionContainer}>
+          <QuestionViewer question={exam.questions[currentQuestionIndex]} />
         </Box>
       </>
     )

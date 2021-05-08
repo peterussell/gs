@@ -18,6 +18,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   answered: {
     backgroundColor: theme.palette.success.main,
     color: theme.palette.secondary.contrastText
+  },
+  questionContainer: {
+    borderWidth: 1,
+    borderTopStyle: "solid",
+    borderBottomStyle: "solid",
+    borderColor: theme.palette.secondary.light,
+    padding: theme.spacing(4)
+  },
+  radio: {
+    color: "#ccc"
   }
 }));
 

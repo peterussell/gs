@@ -13,6 +13,7 @@ export const theme = createMuiTheme({
     secondary: {
       main: "rgb(57 89 114)",
       contrastText: "#fff",
+      light: "#ddd"
     },
     success: {
       main: "#53a653"
