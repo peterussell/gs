@@ -4,6 +4,7 @@ import { Box, Typography } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import { ProgressIndicator } from "./ProgressIndicator";
 import { QuestionViewer } from "./QuestionViewer";
+import { NavigationPanel } from "./NavigationPanel";
 import { useExamState } from "features/exams/store";
 import { useStringUtils } from "utils";
 import useStyles from "./examSimulatorStyle";
@@ -24,7 +25,19 @@ export const ExamSimulator = ({}: Props) => {
 
   useEffect(() => {
     examConfig && loadExam(examConfig);
-  }, [examConfig]);
+  });
+
+  const handleToggleReview = (review: boolean) => {
+    console.log("toggle review. New Value: " + review);
+  };
+
+  const handleGoPrevious = () => {
+    setCurrentQuestionIndex(currentQuestionIndex-1);
+  };
+
+  const handleGoNext = () => {
+    setCurrentQuestionIndex(currentQuestionIndex+1);
+  };
 
   if (!examConfig) {
     return <Redirect push to="/exams" />
@@ -48,7 +61,19 @@ export const ExamSimulator = ({}: Props) => {
         </Box>
 
         <Box mt={4} className={classes.questionContainer}>
-          <QuestionViewer question={exam.questions[currentQuestionIndex]} />
+          <QuestionViewer
+            question={exam.questions[currentQuestionIndex]}
+            onToggleReview={handleToggleReview}
+          />
+        </Box>
+
+        <Box mt={3}>
+          <NavigationPanel
+            canGoPrevious={currentQuestionIndex > 0}
+            canGoNext={currentQuestionIndex < exam.questions.length-1}
+            onGoPrevious={handleGoPrevious}
+            onGoNext={handleGoNext}
+          />
         </Box>
       </>
     )

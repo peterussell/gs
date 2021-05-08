@@ -24,9 +24,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderTopStyle: "solid",
     borderBottomStyle: "solid",
     borderColor: theme.palette.secondary.light,
-    padding: theme.spacing(4)
+    padding: theme.spacing(4),
+    paddingTop: theme.spacing(1)
   },
   radio: {
+    color: "#ccc"
+  },
+  checkbox: {
     color: "#ccc"
   }
 }));
