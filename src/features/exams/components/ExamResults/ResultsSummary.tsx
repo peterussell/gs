@@ -3,7 +3,6 @@ import {
   Grid,
   Typography
 } from "@material-ui/core";
-import { Check, Clear } from "@material-ui/icons";
 
 import { Exam } from "models";
 import { useExamUtils } from "utils";
@@ -22,8 +21,8 @@ export const ResultsSummary = ({ exam }: Props) => {
 
   return (
     <>
-      <Box mt={4}>
-        <Typography variant="h6" className={classes.sectionHeading}>Summary</Typography>
+      <Box mt={4} className={classes.summaryContainer}>
+        <Typography variant="h5" className={classes.sectionHeading}>Summary</Typography>
         <Grid container spacing={1}>
           <Grid item xs={2}>
             <Typography variant="body1">Total questions</Typography>

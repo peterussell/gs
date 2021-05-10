@@ -2,6 +2,7 @@ import { Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 import { ResultsSummary } from "./ResultsSummary";
+import { ResultsList } from "./ResultsList";
 import { useExamState } from "features/exams/store";
 import { useStringUtils } from "utils";
 import useStyles from "./examResultsStyle";
@@ -30,6 +31,7 @@ export const ExamResults = () => {
       </Typography>
 
       <ResultsSummary exam={exam} />
+      <ResultsList exam={exam} />
     </>
   );
 };
