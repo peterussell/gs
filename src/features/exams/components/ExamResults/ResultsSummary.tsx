@@ -54,7 +54,7 @@ export const ResultsSummary = ({ exam }: Props) => {
             <Typography variant="body1">Result</Typography>
           </Grid>
           <Grid item xs={10}>
-            <Typography variant="body1">
+            <Typography variant="body1" className={classes.bold}>
               {isPass(exam) ? "Passed" : "Failed"}
             </Typography>
           </Grid>
