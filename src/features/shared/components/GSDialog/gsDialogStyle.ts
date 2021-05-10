@@ -7,6 +7,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   contentContainer: {
     padding: 30
+  },
+  actionsPanel: {
+    marginRight: 10,
+    marginBottom: 10
   }
 }));
 

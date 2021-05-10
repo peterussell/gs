@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Box, Typography } from "@material-ui/core";
 
 import { Redirect } from "react-router-dom";
@@ -6,12 +6,11 @@ import { ProgressIndicator } from "./ProgressIndicator";
 import { QuestionViewer } from "./QuestionViewer";
 import { NavigationPanel } from "./NavigationPanel";
 import { useExamState } from "features/exams/store";
+import { GSDialog } from "features/shared/components/GSDialog";
 import { useStringUtils } from "utils";
 import useStyles from "./examSimulatorStyle";
 
-interface Props {};
-
-export const ExamSimulator = ({}: Props) => {
+export const ExamSimulator = () => {
   const classes = useStyles();
   const { capitalize } = useStringUtils();
 
@@ -23,13 +22,12 @@ export const ExamSimulator = ({}: Props) => {
     setCurrentQuestionIndex
   } = useExamState();
 
+  const [showFinishDialog, setShowFinishDialog] = useState(false);
+  const [showResults, setShowResults] = useState(false);
+
   useEffect(() => {
     examConfig && loadExam(examConfig);
   });
-
-  const handleToggleReview = (review: boolean) => {
-    console.log("toggle review. New Value: " + review);
-  };
 
   const handleGoPrevious = () => {
     setCurrentQuestionIndex(currentQuestionIndex-1);
@@ -39,8 +37,21 @@ export const ExamSimulator = ({}: Props) => {
     setCurrentQuestionIndex(currentQuestionIndex+1);
   };
 
+  const handleFinish = () => {
+    setShowFinishDialog(true);
+  };
+
+  const handleFinishConfirm = () => {
+    setShowFinishDialog(false);
+    setShowResults(true);
+  };
+
   if (!examConfig) {
     return <Redirect push to="/exams" />
+  }
+
+  if (showResults) {
+    return <Redirect push to="/exams/results" />
   }
 
   return (
@@ -63,7 +74,6 @@ export const ExamSimulator = ({}: Props) => {
         <Box mt={4} className={classes.questionContainer}>
           <QuestionViewer
             question={exam.questions[currentQuestionIndex]}
-            onToggleReview={handleToggleReview}
           />
         </Box>
 
@@ -73,8 +83,23 @@ export const ExamSimulator = ({}: Props) => {
             canGoNext={currentQuestionIndex < exam.questions.length-1}
             onGoPrevious={handleGoPrevious}
             onGoNext={handleGoNext}
+            onFinish={handleFinish}
           />
         </Box>
+
+        <GSDialog
+          title={"Confirm"}
+          open={showFinishDialog}
+          saveText="Confirm"
+          fullWidth
+          maxWidth="sm"
+          onConfirm={handleFinishConfirm}
+          onCancel={() => { setShowFinishDialog(false); }}
+        >
+          <Typography variant="body1">
+            Are you sure you want to finish the exam?
+          </Typography>
+        </GSDialog>
       </>
     )
   )

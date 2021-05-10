@@ -13,7 +13,7 @@ import useStyles from "./gsDialogStyle";
 interface CustomProps {
   children?: React.ReactNode,
   onCancel?: () => void
-  onSave?: () => void,
+  onConfirm?: () => void,
   open: boolean,
   saveText?: string,
   title: string
@@ -24,7 +24,7 @@ type Props = CustomProps & DialogProps;
 export const GSDialog = ({
   children,
   onCancel,
-  onSave,
+  onConfirm,
   open,
   saveText,
   title,
@@ -36,16 +36,16 @@ export const GSDialog = ({
     <Dialog open={open} {...props}>
       <DialogTitle className={classes.titleBar}>{title}</DialogTitle>
       <DialogContent className={classes.contentContainer}>{children}</DialogContent>
-      {(onCancel || onSave) && (
-        <DialogActions>
+      {(onCancel || onConfirm) && (
+        <DialogActions className={classes.actionsPanel}>
           {onCancel && (
             <Button onClick={onCancel}>
               Cancel
             </Button>
           )}
 
-          {onSave && (
-            <Button color="primary" variant="outlined" onClick={onSave}>
+          {onConfirm && (
+            <Button color="primary" variant="outlined" onClick={onConfirm}>
               { saveText ? saveText : "Save" }
             </Button>
           )}

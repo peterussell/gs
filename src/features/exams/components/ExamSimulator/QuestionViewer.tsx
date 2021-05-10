@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Box,
-  Checkbox,
   FormControlLabel,
   Grid,
   Radio,
@@ -13,11 +12,10 @@ import { ExamQuestion } from "models";
 import useStyles from "./examSimulatorStyle";
 
 interface Props {
-  onToggleReview: (review: boolean) => void,
   question: ExamQuestion
 };
 
-export const QuestionViewer = ({ onToggleReview, question }: Props) => {
+export const QuestionViewer = ({ question }: Props) => {
   const classes = useStyles();
 
   const [selectedAnswer, setSelectedAnswer] = useState("");
@@ -26,30 +24,13 @@ export const QuestionViewer = ({ onToggleReview, question }: Props) => {
     setSelectedAnswer((event.target as HTMLInputElement).value);
   };
 
-  const handleToggleReview = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onToggleReview(event.target.checked);
-  };
-
   return (
     <>
-      <Grid container>
-        <Grid item xs={12} style={{ textAlign: "right" }}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={question.status === "review"}
-                onChange={handleToggleReview}
-                classes={{ root: classes.checkbox }}
-              />
-            }
-            label="Review"
-          />
-        </Grid>
-      </Grid>
-
-      <Typography variant="h6">
-        {question.text}
-      </Typography>
+      <Box mt={2}>
+        <Typography variant="h6">
+          {question.text}
+        </Typography>
+      </Box>
 
       <Box mt={2} ml={3}>
         <RadioGroup name="answers" value={selectedAnswer} onChange={handleSelectAnswer}>
