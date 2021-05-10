@@ -41,34 +41,32 @@ export const ResultsList = ({ exam }: Props) => {
               </Grid>
             ) : (
               incorrectAnswers.map(q => (
-                <>
-                  <Grid item key={q.id} xs={12}>
-                    <Grid container spacing={1} alignItems="center">
-                      <Grid item xs={1}><Clear className={classes.incorrectIcon} /></Grid>
-                      <Grid item xs={11}>
-                        <Grid container spacing={1}>
-                          <Grid item xs={12}>
-                            <Typography variant="body1" className={classes.bold}>{q.text}</Typography>
-                          </Grid>
-                          <Grid item xs={2}>
-                            <Typography variant="body1">Your answer:</Typography>
-                          </Grid>
-                          <Grid item xs={10}>
-                            {q.answers.find(a => a.id === q.selectedAnswerId)?.text || "-"}
-                          </Grid>
-                          <Grid item xs={2}>
-                            <Typography variant="body1">Correct answer:</Typography>
-                          </Grid>
-                          <Grid item xs={10}>
-                            <Typography variant="body1">
-                              {q.answers.find(a => a.id === q.correctAnswerId)?.text || "-"}
-                            </Typography>
-                          </Grid>
+                <Grid item key={q.id} xs={12}>
+                  <Grid container spacing={1} alignItems="center">
+                    <Grid item xs={1}><Clear className={classes.incorrectIcon} /></Grid>
+                    <Grid item xs={11}>
+                      <Grid container spacing={1}>
+                        <Grid item xs={12}>
+                          <Typography variant="body1" className={classes.bold}>{q.text}</Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                          <Typography variant="body1">Your answer:</Typography>
+                        </Grid>
+                        <Grid item xs={10}>
+                          {q.answers.find(a => a.id === q.selectedAnswerId)?.text || "-"}
+                        </Grid>
+                        <Grid item xs={2}>
+                          <Typography variant="body1">Correct answer:</Typography>
+                        </Grid>
+                        <Grid item xs={10}>
+                          <Typography variant="body1">
+                            {q.answers.find(a => a.id === q.correctAnswerId)?.text || "-"}
+                          </Typography>
                         </Grid>
                       </Grid>
                     </Grid>
                   </Grid>
-                </>
+                </Grid>
               ))
             )
           }
@@ -87,28 +85,26 @@ export const ResultsList = ({ exam }: Props) => {
               </Grid>
             ) : (
               unansweredQuestions.map(q => (
-                <>
-                  <Grid item key={q.id} xs={12}>
-                    <Grid container spacing={1} alignItems="center">
-                      <Grid item xs={1}><HelpOutline className={classes.unknownIcon} /></Grid>
-                      <Grid item xs={11}>
-                        <Grid container spacing={1}>
-                          <Grid item xs={12}>
-                            <Typography variant="body1" className={classes.bold}>{q.text}</Typography>
-                          </Grid>
-                          <Grid item xs={2}>
-                            <Typography variant="body1">Correct answer:</Typography>
-                          </Grid>
-                          <Grid item xs={10}>
-                            <Typography variant="body1">
-                              {q.answers.find(a => a.id === q.correctAnswerId)?.text || "-"}
-                            </Typography>
-                          </Grid>
+                <Grid item key={q.id} xs={12}>
+                  <Grid container spacing={1} alignItems="center">
+                    <Grid item xs={1}><HelpOutline className={classes.unknownIcon} /></Grid>
+                    <Grid item xs={11}>
+                      <Grid container spacing={1}>
+                        <Grid item xs={12}>
+                          <Typography variant="body1" className={classes.bold}>{q.text}</Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                          <Typography variant="body1">Correct answer:</Typography>
+                        </Grid>
+                        <Grid item xs={10}>
+                          <Typography variant="body1">
+                            {q.answers.find(a => a.id === q.correctAnswerId)?.text || "-"}
+                          </Typography>
                         </Grid>
                       </Grid>
                     </Grid>
                   </Grid>
-                </>
+                </Grid>
               ))
             )
           }
@@ -127,28 +123,26 @@ export const ResultsList = ({ exam }: Props) => {
               </Grid>
             ) : (
               correctAnswers.map(q => (
-                <>
-                  <Grid item key={q.id} xs={12}>
-                    <Grid container spacing={1} alignItems="center">
-                      <Grid item xs={1}><Check className={classes.correctIcon} /></Grid>
-                      <Grid item xs={11}>
-                        <Grid container spacing={1}>
-                          <Grid item xs={12}>
-                            <Typography variant="body1" className={classes.bold}>{q.text}</Typography>
-                          </Grid>
-                          <Grid item xs={2}>
-                            <Typography variant="body1">Correct answer:</Typography>
-                          </Grid>
-                          <Grid item xs={10}>
-                            <Typography variant="body1">
-                              {q.answers.find(a => a.id === q.correctAnswerId)?.text || "-"}
-                            </Typography>
-                          </Grid>
+                <Grid item key={q.id} xs={12}>
+                  <Grid container spacing={1} alignItems="center">
+                    <Grid item xs={1}><Check className={classes.correctIcon} /></Grid>
+                    <Grid item xs={11}>
+                      <Grid container spacing={1}>
+                        <Grid item xs={12}>
+                          <Typography variant="body1" className={classes.bold}>{q.text}</Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                          <Typography variant="body1">Correct answer:</Typography>
+                        </Grid>
+                        <Grid item xs={10}>
+                          <Typography variant="body1">
+                            {q.answers.find(a => a.id === q.correctAnswerId)?.text || "-"}
+                          </Typography>
                         </Grid>
                       </Grid>
                     </Grid>
                   </Grid>
-                </>
+                </Grid>
               ))
             )
           }

@@ -5,10 +5,8 @@ import { ResultsSummary } from "./ResultsSummary";
 import { ResultsList } from "./ResultsList";
 import { useExamState } from "features/exams/store";
 import { useStringUtils } from "utils";
-import useStyles from "./examResultsStyle";
 
 export const ExamResults = () => {
-  const classes = useStyles();
   const { capitalize } = useStringUtils();
 
   const { exam } = useExamState();

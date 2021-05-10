@@ -22,8 +22,6 @@ export const ResultsSummary = ({ exam }: Props) => {
 
   if (!exam.questions?.length) { return null; }
 
-  console.log(exam);
-
   return (
     <>
       <Box mt={4} className={classes.summaryContainer}>
