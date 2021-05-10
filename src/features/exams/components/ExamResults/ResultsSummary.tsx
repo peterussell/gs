@@ -13,7 +13,12 @@ interface Props { exam: Exam };
 export const ResultsSummary = ({ exam }: Props) => {
   const classes = useStyles();
 
-  const { getCorrectQuestionCount, getScoreAsPercentage, isPass } = useExamUtils();
+  const {
+    getCorrectQuestionCount,
+    getScoreAsPercentage,
+    getUnansweredQuestions,
+    isPass
+  } = useExamUtils();
 
   if (!exam.questions?.length) { return null; }
 
@@ -30,13 +35,18 @@ export const ResultsSummary = ({ exam }: Props) => {
           <Grid item xs={10}>
             <Typography variant="body1">{exam.questions?.length}</Typography>
           </Grid>
-
+          <Grid item xs={2}>
+            <Typography variant="body1">Unanswered</Typography>
+          </Grid>
+          <Grid item xs={10}>
+            <Typography variant="body1">{getUnansweredQuestions(exam).length}</Typography>
+          </Grid>
           <Grid item xs={2}>
             <Typography variant="body1">Score</Typography>
           </Grid>
           <Grid item xs={10}>
             <Typography variant="body1">
-              {getCorrectQuestionCount(exam.questions)} / {exam.questions?.length} ({getScoreAsPercentage(exam)}%)
+              {getCorrectQuestionCount(exam.questions)}/{exam.questions?.length} ({getScoreAsPercentage(exam)}%)
             </Typography>
           </Grid>
 
