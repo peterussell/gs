@@ -1,5 +1,5 @@
 
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import {
   Box,
@@ -16,17 +16,26 @@ import { ExamConfigurator, ExamSelectorCard } from "features/exams/components";
 import { GSDialog } from "features/shared/components";
 import useStyles from "./examSelectorStyle";
 
-import { pplExams } from "mocks"; // tmp
+// import { pplExams } from "mocks"; // tmp
 
 export const ExamSelector = () => {
   const classes = useStyles();
+
   const [redirect, setRedirect] = useState<string | null>(null);
 
-  const { setExamConfig } = useExamState();
+  const {
+    exams,
+    loadExams,
+    setExamConfig
+  } = useExamState();
 
   const [tabIndex, setTabIndex] = useState(0);
   const [showDialog, setShowDialog] = useState(false);
   const [selectedExam, setSelectedExam] = useState<Exam | null>(null);
+
+  useEffect(() => {
+    loadExams();
+  });
 
   const handleTabChange = (_: any, newValue: number) => {
     setTabIndex(newValue);
@@ -78,7 +87,7 @@ export const ExamSelector = () => {
         <Grid item xs={12}>
           <TabPanel value={tabIndex} index={0}>
             <Grid container spacing={4}>
-              {pplExams.map(e => (
+              {exams?.map(e => (
                 <Grid item xs={4} key={e.id}>
                   <ExamSelectorCard exam={e} onClick={(e: Exam) => { handleCardClick(e); }} />
                 </Grid>

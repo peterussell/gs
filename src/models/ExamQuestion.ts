@@ -5,7 +5,7 @@ export interface ExamQuestion {
   text: string,
   answers: ExamAnswer[],
   correctAnswerId: string,
-  assetPaths?: string[]
   selectedAnswerId?: string,
+  assetPaths?: string[],
   status: ExamQuestionStatus
 };

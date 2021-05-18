@@ -61,10 +61,9 @@ export abstract class ApiClient {
 
   private addBaseUrlAndCommonHeaders = async (params: AxiosRequestConfig) => ({
     ...params,
-    baseURL: process.env.NEXT_PUBLIC_API_URL,
+    baseURL: "https://gs-api-prod.appspot.com/api",
     headers: {
       ...params.headers,
-      ...(await this.getAuthHeader()),
     },
   });
 
