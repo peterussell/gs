@@ -8,8 +8,7 @@ import { Exam, ExamSimulatorConfig } from "models";
 import { ExamApi } from "api";
 
 import {
-  exam as mockExam,
-  pplExams as mockPplExams
+  exam as mockExam
 } from "mocks"; // tmp
 
 const api = new ExamApi();

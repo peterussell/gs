@@ -35,7 +35,7 @@ export const ExamSelector = () => {
 
   useEffect(() => {
     loadExams();
-  });
+  }, []);
 
   const handleTabChange = (_: any, newValue: number) => {
     setTabIndex(newValue);

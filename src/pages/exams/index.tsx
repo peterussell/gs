@@ -6,7 +6,7 @@ import {
   ExamSelector,
   ExamSimulator
 } from "features/exams/components";
-import useStyles from "./pagesStyle";
+import useStyles from "../pagesStyle";
 
 export const ExamsPage = () => {
   const classes = useStyles();

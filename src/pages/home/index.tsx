@@ -1,7 +1,7 @@
 import { Container, Grid, Typography } from "@material-ui/core";
 
 import { ExamSelector } from "features/exams/components";
-import useStyles from "./pagesStyle";
+import useStyles from "../pagesStyle";
 
 export const HomePage = () => {
   const classes = useStyles();
