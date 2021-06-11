@@ -4,4 +4,4 @@ export * from "./exams";
 export * from "./home";
 export * from "./not-found";
 export * from "./resources";
-export * from "./submit-questions";
+export * from "./contribute";

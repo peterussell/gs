@@ -15,7 +15,7 @@ export const HomePage = () => {
             <img src="/images/landing-page/groundschoolnz-logo-200.png" alt="GroundSchool NZ" />
           </Grid>
 
-          <Grid item className={classes.descriptionContainer}>
+          <Grid item className={classes.homeDescriptionContainer}>
             <Typography variant="h5" color="textSecondary" className={classes.title}>
               Welcome to Ground School
             </Typography>

@@ -1,1 +1,1 @@
-export * from "./QuestionSubmitter";
+export * from "./SubmitQuestionForm";

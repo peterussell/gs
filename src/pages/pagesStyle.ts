@@ -11,15 +11,25 @@ const useStyles = makeStyles((theme: Theme) => ({
   logoContainer: {
     padding: 30
   },
-  descriptionContainer: {
+  homeDescriptionContainer: {
     maxWidth: 400
+  },
+  pageDescriptionContainer: {
+    maxWidth: 700,
+    alignSelf: "left"
   },
   title: {
     textTransform: "uppercase",
     marginBottom: 16
   },
+  pageTitle: {
+    marginBottom: theme.spacing(2)
+  },
   description: {
     fontSize: "1.2rem"
+  },
+  pageDescription: {
+    marginBottom: theme.spacing(2)
   },
   bodyContainer: {
     marginTop: theme.spacing(4),

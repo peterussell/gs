@@ -6,7 +6,7 @@ import {
   HomePage,
   NotFoundPage,
   ResourcesPage,
-  SubmitQuestionsPage
+  ContributePage
 } from "pages";
 
 const routes = (
@@ -15,7 +15,7 @@ const routes = (
     <Route path="/exams" component={ExamsPage} />
     <Route path="/articles" component={ArticlesPage} />
     <Route path="/resources" component={ResourcesPage} />
-    <Route path="/submit-questions" component={SubmitQuestionsPage} />
+    <Route path="/contribute" component={ContributePage} />
     <Route path="/contact" component={ContactPage} />
     <Route component={NotFoundPage} />
   </Switch>
