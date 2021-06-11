@@ -9,14 +9,12 @@ import {
   Typography
 } from "@material-ui/core";
 
-import { Exam, ExamSimulatorConfig } from "models";
+import { Exam, ExamSimulatorConfig, LicenseType } from "models";
 import { useExamState } from "features/exams/store";
 
 import { ExamConfigurator, ExamSelectorCard } from "features/exams/components";
 import { GSDialog } from "features/shared/components";
 import useStyles from "./examSelectorStyle";
-
-// import { pplExams } from "mocks"; // tmp
 
 export const ExamSelector = () => {
   const classes = useStyles();
@@ -56,6 +54,26 @@ export const ExamSelector = () => {
     setSelectedExam(null);
   };
 
+  const getCardsForLicenseType = (
+    licenseType: LicenseType, exams?: Exam[]
+  ): ReactNode => {
+    const matchingExams = exams?.filter((e: Exam) => e.licenseType === licenseType);
+
+    if (!matchingExams?.length) {
+      return <Typography variant="body1">No exams found</Typography>
+    }
+
+    return (
+      <Grid container spacing={4}>
+        {matchingExams.map((e: Exam) => (
+          <Grid item xs={4} key={e.id}>
+            <ExamSelectorCard exam={e} onClick={(e: Exam) => { handleCardClick(e); }} />
+          </Grid>
+        ))}
+      </Grid>
+    );
+  };
+
   if (redirect) {
     return <Redirect push to={redirect} />;
   }
@@ -80,31 +98,20 @@ export const ExamSelector = () => {
         <Tab label="PPL" id="tab-0" className={tabIndex !== 0 ? classes.inactiveTab : undefined} />
         <Tab label="CPL" id="tab-1" className={tabIndex !== 1 ? classes.inactiveTab : undefined} />
         <Tab label="IR" id="tab=2" className={tabIndex !== 2 ? classes.inactiveTab : undefined} />
-        <Tab label="Other" id="tab=2" className={tabIndex !== 3 ? classes.inactiveTab : undefined} />
       </Tabs>
 
       <Grid container className={classes.tabPanelContainer}>
         <Grid item xs={12}>
           <TabPanel value={tabIndex} index={0}>
-            <Grid container spacing={4}>
-              {exams?.map(e => (
-                <Grid item xs={4} key={e.id}>
-                  <ExamSelectorCard exam={e} onClick={(e: Exam) => { handleCardClick(e); }} />
-                </Grid>
-              ))}
-            </Grid>
+            {getCardsForLicenseType("PPL", exams)}
           </TabPanel>
 
           <TabPanel value={tabIndex} index={1}>
-            <Typography variant="h6">CPL Exams</Typography>
+            {getCardsForLicenseType("CPL", exams)}
           </TabPanel>
 
           <TabPanel value={tabIndex} index={2}>
-            <Typography variant="h6">IR Exams</Typography>
-          </TabPanel>
-
-          <TabPanel value={tabIndex} index={3}>
-            <Typography variant="h6">Other question banks</Typography>
+            {getCardsForLicenseType("IR", exams)}
           </TabPanel>
         </Grid>
       </Grid>

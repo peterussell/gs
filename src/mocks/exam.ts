@@ -3,7 +3,7 @@ import { Exam } from "models";
 export const exam: Exam = {
   id: "1",
   name: "Air Law",
-  licenseType: "ppl",
+  licenseType: "PPL",
   slug: "air-law",
   availableQuestions: 76,
   aspeqName: "PPL Air Law (Aeroplane)",

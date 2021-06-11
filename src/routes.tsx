@@ -5,7 +5,8 @@ import {
   ExamsPage,
   HomePage,
   NotFoundPage,
-  ResourcesPage
+  ResourcesPage,
+  SubmitQuestionsPage
 } from "pages";
 
 const routes = (
@@ -14,6 +15,7 @@ const routes = (
     <Route path="/exams" component={ExamsPage} />
     <Route path="/articles" component={ArticlesPage} />
     <Route path="/resources" component={ResourcesPage} />
+    <Route path="/submit-questions" component={SubmitQuestionsPage} />
     <Route path="/contact" component={ContactPage} />
     <Route component={NotFoundPage} />
   </Switch>

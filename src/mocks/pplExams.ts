@@ -4,7 +4,7 @@ export const pplExams: Exam[] = [
   {
     id: "1",
     name: "Air Law",
-    licenseType: "ppl",
+    licenseType: "PPL",
     slug: "air-law",
     availableQuestions: 76,
     aspeqName: "PPL Air Law (Aeroplane)",
@@ -17,7 +17,7 @@ export const pplExams: Exam[] = [
   {
     id: "2",
     name: "Air Tech",
-    licenseType: "ppl",
+    licenseType: "PPL",
     slug: "air-tech",
     availableQuestions: 36,
     aspeqName: "PPL Aircraft Technical Knowledge (Aeroplane)",
@@ -31,7 +31,7 @@ export const pplExams: Exam[] = [
     id: "3",
     name: "Flight Radio",
     slug: "flight-radio",
-    licenseType: "ppl",
+    licenseType: "PPL",
     availableQuestions: 120,
     aspeqName: "FRTO Flight Radio",
     aspeqExamInfo: {
@@ -43,7 +43,7 @@ export const pplExams: Exam[] = [
   {
     id: "4",
     name: "Human Factors",
-    licenseType: "ppl",
+    licenseType: "PPL",
     slug: "human-factors",
     availableQuestions: 96,
     aspeqName: "PPL Human Factors",
@@ -56,7 +56,7 @@ export const pplExams: Exam[] = [
   {
     id: "5",
     name: "Meteorology",
-    licenseType: "ppl",
+    licenseType: "PPL",
     slug: "meteorology",
     availableQuestions: 10,
     aspeqName: "PPL Meteorology",
@@ -69,7 +69,7 @@ export const pplExams: Exam[] = [
   {
     id: "6",
     name: "Nav & Flight Planning",
-    licenseType: "ppl",
+    licenseType: "PPL",
     slug: "nav-flight-planning",
     availableQuestions: 84,
     aspeqName: "PPL Air Navigation and Flight Planning",

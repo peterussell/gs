@@ -28,7 +28,9 @@ export const ExamSelectorCard = ({ exam, onClick }: Props) => {
       <CardActionArea>
         <CardMedia image={`/images/exams/${exam.slug}.png`} title={exam.name} className={classes.media} />
         <CardContent>
-          <Typography variant="h6" gutterBottom>{exam.name}</Typography>
+          <Typography variant="h6" gutterBottom>
+            {exam.licenseType !== "Other" ? exam.licenseType : null} {exam.name}
+          </Typography>
 
           <Box mt={2} mb={1}>
             <Grid container spacing={1} >
