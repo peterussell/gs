@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useField, FieldHookConfig } from "formik";
 import { TextField, TextFieldProps } from "@material-ui/core";
 
@@ -9,6 +9,9 @@ export const TextFieldSet: React.FC<Props> = ({ ...props }) => {
   const errorText = meta.error && meta.touched ? meta.error : "";
 
   const [fieldValue, setFieldValue] = useState(field.value);
+
+  // Listen for value changes to update the component
+  useEffect(() => { setFieldValue(field.value); }, [field.value]);
 
   return (
     <TextField

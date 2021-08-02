@@ -1,6 +1,6 @@
 import { Exam } from "models";
 
-export interface SubmitQuestionRequest {
+export interface AddQuestionRequest {
   examId: string,
   question: string,
   correctAnswer: string,

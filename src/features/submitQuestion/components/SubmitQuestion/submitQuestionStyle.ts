@@ -1,12 +1,8 @@
 import { Theme, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({
-  sectionTitle: {
+  title: {
     marginBottom: theme.spacing(2)
-  },
-  error: {
-    marginTop: theme.spacing(1),
-    color: theme.palette.error.main
   }
 }));
 

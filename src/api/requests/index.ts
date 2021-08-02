@@ -1,1 +1,1 @@
-export * from "./submitQuestionRequest";
+export * from "./addQuestionRequest";

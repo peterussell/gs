@@ -3,46 +3,50 @@ import {
   Box,
   Button,
   Divider,
-  FormControl,
   Grid,
-  MenuItem,
-  Select,
-  TextField,
   Typography
 } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
-import { Formik } from "formik";
+import { Formik, FormikHelpers } from "formik";
 import * as Yup from "yup";
 
-import { TextFieldSet } from "features/shared/components/TextFieldSet";
+import { QuestionApi } from "api";
 import { useExamState } from "features/exams/store";
-import useStyles from "./submitQuestionFormStyle";
+import { SubmitQuestionForm as FormValues } from "models/forms";
+import { useSubmitQuestionMapper } from "mappers";
+
+import {
+  AutocompleteSet,
+  AutocompleteOption,
+  CheckboxSet,
+  TextFieldSet
+} from "features/shared/components";
+import useStyles from "./submitQuestionStyle";
 
 export const SubmitQuestionForm = () => {
   const classes = useStyles();
   const { exams, loadExams } = useExamState();
+  const { map } = useSubmitQuestionMapper();
   const [redirect, setRedirect] = useState("");
-  const [selectedLicenseType, setSelectedLicenseType] = useState("");
-  const [selectedExam, setSelectedExam] = useState("");
 
   useEffect(() => { if (!exams) { loadExams(); } }, [exams]);
 
-  const handleLicenseTypeChange = (event: any) => {
-    setSelectedLicenseType(event?.target.value);
+  const api = new QuestionApi();
+
+  const licenseTypeOptions: AutocompleteOption<string>[] = [
+    { label: "PPL", value: "PPL" },
+    { label: "CPL", value: "CPL" },
+    { label: "IR", value: "IR" }
+  ];
+
+  const getExamOptions = (licenseType: string): AutocompleteOption<string>[] => {
+    const matchingExams = exams?.filter(e => e.licenseType === licenseType);
+    return matchingExams?.length ?
+      matchingExams.map(e => ({ label: e.name, value: e.id })) :
+      [];
   };
 
-  const handleExamTypeChange = (event: any) => {
-    setSelectedExam(event?.target.value);
-  };
-
-  const getExamItems = () => {
-    const matchingExams = exams?.filter(e => e.licenseType === selectedLicenseType);
-    return matchingExams?.map(e => (
-      <MenuItem value={e.id} key={e.id}>{e.name}</MenuItem>
-    ));
-  };
-
-  const initialValues = {
+  const initialValues: FormValues = {
     licenseType: "",
     examId: "",
     question: "",
@@ -50,12 +54,13 @@ export const SubmitQuestionForm = () => {
     incorrectAnswer1: "",
     incorrectAnswer2: "",
     incorrectAnswer3: "",
-    authorName: ""
+    authorName: "",
+    addAnother: true
   };
 
   const schema = Yup.object().shape({
-    // licenseType: Yup.string().required("License type is required"),
-    // examId: Yup.string().required("Exam is required"),
+    licenseType: Yup.string().required("License type is required"),
+    examId: Yup.string().required("Exam is required"),
     question: Yup.string().required("Question is required").max(1000, "Max 1000 characters"),
     correctAnswer: Yup.string().required("Correct answer is required").max(1000, "Max 1000 characters"),
     incorrectAnswer1: Yup.string().max(1000, "Max 1000 characters"),
@@ -64,9 +69,29 @@ export const SubmitQuestionForm = () => {
     authorName: Yup.string().max(1000, "Max 1000 characters")
   });
 
-  const handleFormSubmit = (values: any) => {
-    console.log('form submit, values:');
-    console.log(values);
+  const handleFormSubmit = (
+    values: FormValues,
+    { setSubmitting, setValues }: FormikHelpers<FormValues>
+  ) => {
+    const req = map(values);
+    
+    api.addQuestion(req)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // reset form, don't validate on reset
+    setValues({
+      ...initialValues,
+      licenseType: values.licenseType,
+      examId: values.examId,
+      authorName: values.authorName,
+    }, false);
+
+    setSubmitting(false);
   };
 
   if (redirect) {
@@ -76,7 +101,7 @@ export const SubmitQuestionForm = () => {
   return (
     <>
       {/* Select exam */}
-      <Typography variant="h5" className={classes.sectionTitle}>
+      <Typography variant="h5" className={classes.title}>
         Choose exam
       </Typography>
 
@@ -84,14 +109,14 @@ export const SubmitQuestionForm = () => {
         initialValues={initialValues}
         onSubmit={handleFormSubmit}
         validationSchema={schema}
+        validateOnMount
         validateOnChange
       >
         {({
           handleSubmit,
           isSubmitting,
           isValid,
-          errors,
-          touched
+          values
         }) => (
           <form onSubmit={handleSubmit}>
             <Grid container spacing={2} alignItems="center">
@@ -99,19 +124,10 @@ export const SubmitQuestionForm = () => {
                 <Typography variant="body1">License type*</Typography>
               </Grid>
               <Grid item xs={4}>
-                <FormControl variant="outlined" fullWidth>
-                  <Select
-                    value={selectedLicenseType}
-                    onChange={handleLicenseTypeChange}
-                    name="licenseType"
-                    error={(errors.licenseType && touched.licenseType) || false}
-                  >
-                    <MenuItem value="PPL" key="ppl">PPL</MenuItem>
-                    <MenuItem value="CPL" key="cpl">CPL</MenuItem>
-                    <MenuItem value="IR" key="ir">IR</MenuItem>
-                  </Select>
-                </FormControl>
-                {errors.licenseType && touched.licenseType && <div className={classes.error}>{errors.licenseType}</div>}
+                <AutocompleteSet
+                  name="licenseType"
+                  options={licenseTypeOptions}
+                />
               </Grid>
               <Grid item xs={6}>{/* Spacer */}</Grid>
 
@@ -119,18 +135,10 @@ export const SubmitQuestionForm = () => {
                 <Typography variant="body1">Exam*</Typography>
               </Grid>
               <Grid item xs={4}>
-                <FormControl variant="outlined" fullWidth>
-                  <Select
-                    value={selectedExam}
-                    onChange={handleExamTypeChange}
-                    disabled={!selectedLicenseType}
-                    name="examId"
-                    error={(errors.examId && touched.examId) || false}
-                  >
-                    {getExamItems()}
-                  </Select>
-                </FormControl>
-                {errors.examId && touched.examId && <div className={classes.error}>{errors.examId}</div>}
+                <AutocompleteSet
+                  name="examId"
+                  options={getExamOptions(values.licenseType)}
+                />
               </Grid>
               <Grid item xs={6}>{/* Spacer */}</Grid>
             </Grid>
@@ -181,7 +189,7 @@ export const SubmitQuestionForm = () => {
             <Grid container spacing={2} alignItems="center">
               <Grid item xs={2}>
                 <Typography variant="body1">Your name</Typography>
-                <Typography variant="subtitle2">Question will be credited to you if specified</Typography>
+                <Typography variant="subtitle2">Leave blank to submit anonymously</Typography>
               </Grid>
               <Grid item xs={4}>
                 <TextFieldSet name="authorName" />
@@ -193,8 +201,8 @@ export const SubmitQuestionForm = () => {
             </Box>
 
             {/* Submit button */}
-            <Grid container>
-              <Grid item xs={12}>
+            <Grid container alignItems="center" spacing={3}>
+              <Grid item>
                 <Button
                   variant="contained"
                   color="primary"
@@ -203,7 +211,10 @@ export const SubmitQuestionForm = () => {
                 >
                   Submit question
                 </Button>
-              </Grid> 
+              </Grid>
+              <Grid item>
+                <CheckboxSet name="addAnother" title="Add another question" />
+              </Grid>
             </Grid>
           </form>
         )}

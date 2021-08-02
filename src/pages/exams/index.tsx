@@ -20,5 +20,5 @@ export const ExamsPage = () => {
         <Route path={`${path}/results`} component={ExamResults} />
       </Switch>
     </Container>
-  )
+  );
 };
