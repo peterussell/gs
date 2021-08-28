@@ -30,7 +30,7 @@ export const GSAppBar = () => {
                 <ListItemText primary="Exams" />
               </ListItem>
 
-              <ListItem className={classes.menuItem} button component="a" href="/contribute">
+              {/* <ListItem className={classes.menuItem} button component="a" href="/contribute">
                 <ListItemText primary="Contribute" />
               </ListItem>
 
@@ -40,7 +40,7 @@ export const GSAppBar = () => {
 
               <ListItem className={classes.menuItem} button component="a" href="/resources">
                 <ListItemText primary="Resources" />
-              </ListItem>
+              </ListItem> */}
 
               <ListItem className={classes.menuItem} button component="a" href="/contact">
                 <ListItemText primary="Contact" />
