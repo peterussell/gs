@@ -57,7 +57,9 @@ export const ExamSelector = () => {
   const getCardsForLicenseType = (
     licenseType: LicenseType, exams?: Exam[]
   ): ReactNode => {
-    const matchingExams = exams?.filter((e: Exam) => e.licenseType === licenseType);
+    const matchingExams = exams?.filter((e: Exam) => (
+      e.licenseType.toLowerCase() === licenseType.toLowerCase()
+    ));
 
     if (!matchingExams?.length) {
       return <Typography variant="body1">No exams found</Typography>
@@ -82,7 +84,7 @@ export const ExamSelector = () => {
     <>
      <Typography variant="h4">Practice exams</Typography>
 
-      <Box mt={2} mb={3}>
+      <Box mb={3}>
         <Grid container>
           <Grid item md={10}>
             <Typography variant="body1">
