@@ -6,3 +6,5 @@ export * from "./ExamQuestion";
 export * from "./ExamQuestionStatus";
 export * from "./ExamSimulatorConfig"
 export * from "./LicenseType";
+
+export * from "./forms";

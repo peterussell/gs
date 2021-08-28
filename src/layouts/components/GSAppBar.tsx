@@ -30,6 +30,10 @@ export const GSAppBar = () => {
                 <ListItemText primary="Exams" />
               </ListItem>
 
+              <ListItem className={classes.menuItem} button component="a" href="/contribute">
+                <ListItemText primary="Contribute" />
+              </ListItem>
+
               <ListItem className={classes.menuItem} button component="a" href="/articles">
                 <ListItemText primary="Articles" />
               </ListItem>

@@ -1,1 +1,2 @@
-export * from "./QuestionSubmitter";
+export * from "./SubmitQuestion";
+export * from "./SubmitSuccess";
