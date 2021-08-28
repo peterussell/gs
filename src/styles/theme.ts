@@ -32,7 +32,8 @@ export const theme = createMuiTheme({
   typography: {
     fontSize: 13,
     body1: {
-      fontFamily: "Roboto, sans-serif"
+      fontFamily: "Roboto, sans-serif",
+      lineHeight: "1.6rem"
     },
     h1: {
       fontFamily: "Roboto Condensed, sans-serif"
@@ -45,7 +46,8 @@ export const theme = createMuiTheme({
     },
     h4: {
       fontFamily: "Roboto Condensed, sans-serif",
-      letterSpacing: -0.5
+      letterSpacing: -0.5,
+      marginBottom: 20
     },
     h5: {
       fontFamily: "Roboto Condensed, sans-serif",
