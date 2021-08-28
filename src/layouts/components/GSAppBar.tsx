@@ -9,6 +9,7 @@ import {
   Typography
 } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 
 import useStyles from "./gsAppBarStyles";
 
@@ -19,12 +20,18 @@ export const GSAppBar = () => {
     <AppBar position="static" elevation={0}>
       <Container maxWidth="md">
         <Toolbar disableGutters>
-          <Typography variant="h5">GroundSchool NZ</Typography>
+          <Link to="/" className={classes.mainTitle}>
+            <Typography variant="h5">GroundSchool NZ</Typography>
+          </Link>
 
           <div className={classes.menuContainer}>
             <List className={classes.menuList}>
-              <ListItem className={classes.menuItem} button component="a" href="/">
+              <ListItem className={classes.menuItem} button component="a" href="/exams">
                 <ListItemText primary="Exams" />
+              </ListItem>
+
+              <ListItem className={classes.menuItem} button component="a" href="/contribute">
+                <ListItemText primary="Contribute" />
               </ListItem>
 
               <ListItem className={classes.menuItem} button component="a" href="/articles">

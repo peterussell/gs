@@ -1,5 +1,5 @@
 export type LicenseType =
-  "ppl"
-  | "cpl"
-  | "ir"
-  | "other";
+  "PPL"
+  | "CPL"
+  | "IR"
+  | "Other";

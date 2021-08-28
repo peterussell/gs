@@ -1,6 +1,10 @@
 import { Theme, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({
+  mainTitle: {
+    color: theme.palette.primary.contrastText,
+    textDecoration: "none !important"
+  },
   menuContainer: {
     display: "flex",
     flexGrow: 1

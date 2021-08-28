@@ -61,10 +61,9 @@ export abstract class ApiClient {
 
   private addBaseUrlAndCommonHeaders = async (params: AxiosRequestConfig) => ({
     ...params,
-    baseURL: process.env.NEXT_PUBLIC_API_URL,
+    baseURL: "https://0y2ubme7cc.execute-api.ap-southeast-2.amazonaws.com/v1",
     headers: {
       ...params.headers,
-      ...(await this.getAuthHeader()),
     },
   });
 
