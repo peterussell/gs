@@ -11,16 +11,18 @@ export const theme = createMuiTheme({
       light: "#fff",
     },
     secondary: {
-      main: "rgb(57 89 114)"
+      main: "rgb(57 89 114)",
+      contrastText: "#fff",
+      light: "#ddd"
     },
     success: {
-      main: "#0e0" // placeholder
+      main: "#53a653"
     },
     warning: {
       main: "#0e0" // placeholder
     },
     error: {
-      main: "#0e0" // placeholder
+      main: "#c00"
     },
     text: {
       primary: "#333",

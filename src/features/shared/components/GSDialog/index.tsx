@@ -2,43 +2,55 @@ import React from "react";
 import {
   Button,
   Dialog,
+  DialogProps,
   DialogActions,
   DialogTitle,
-  DialogContent,
-  DialogContentText
+  DialogContent
 } from "@material-ui/core";
 
-interface Props {
+import useStyles from "./gsDialogStyle";
+
+interface CustomProps {
   children?: React.ReactNode,
-  onCancel: () => void
-  onSave: () => void,
+  onCancel?: () => void
+  onConfirm?: () => void,
   open: boolean,
   saveText?: string,
   title: string
 };
 
+type Props = CustomProps & DialogProps;
+
 export const GSDialog = ({
   children,
   onCancel,
-  onSave,
+  onConfirm,
   open,
   saveText,
-  title
+  title,
+  ...props
 }: Props) => {
+  const classes = useStyles();
+
   return (
-    <Dialog open={open}>
-      <DialogTitle>{title}</DialogTitle>
-      <DialogContent>
-        <DialogContentText>{children}</DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onCancel}>
-          Cancel
-        </Button>
-        <Button color="primary" variant="outlined" onClick={onSave}>
-          { saveText ? saveText : "Save" }
-        </Button>
-      </DialogActions>
+    <Dialog open={open} {...props}>
+      <DialogTitle className={classes.titleBar}>{title}</DialogTitle>
+      <DialogContent className={classes.contentContainer}>{children}</DialogContent>
+      {(onCancel || onConfirm) && (
+        <DialogActions className={classes.actionsPanel}>
+          {onCancel && (
+            <Button onClick={onCancel}>
+              Cancel
+            </Button>
+          )}
+
+          {onConfirm && (
+            <Button color="primary" variant="outlined" onClick={onConfirm}>
+              { saveText ? saveText : "Save" }
+            </Button>
+          )}
+        </DialogActions>
+      )}
     </Dialog>
   )
 };

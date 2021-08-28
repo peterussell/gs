@@ -1,2 +1,1 @@
-export * from "./courseResponse";
-export * from "./coursesResponse";
+export * from "./getExamsResponse";
