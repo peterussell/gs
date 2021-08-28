@@ -61,7 +61,7 @@ export abstract class ApiClient {
 
   private addBaseUrlAndCommonHeaders = async (params: AxiosRequestConfig) => ({
     ...params,
-    baseURL: "https://gs-api-prod.appspot.com/api",
+    baseURL: "https://0y2ubme7cc.execute-api.ap-southeast-2.amazonaws.com/v1",
     headers: {
       ...params.headers,
     },
