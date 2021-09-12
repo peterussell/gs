@@ -11,6 +11,7 @@ export const useSubmitQuestionMapper = (): Mapper<SubmitQuestionForm, AddQuestio
       incorrectAnswer1: values.incorrectAnswer1,
       incorrectAnswer2: values.incorrectAnswer2,
       incorrectAnswer3: values.incorrectAnswer3,
+      syllabusReference: values.syllabusReference,
       authorName: values.authorName
     };
   };

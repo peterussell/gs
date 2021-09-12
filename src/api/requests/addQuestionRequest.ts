@@ -5,5 +5,6 @@ export interface AddQuestionRequest {
   incorrectAnswer1?: string,
   incorrectAnswer2?: string,
   incorrectAnswer3?: string,
+  syllabusReference?: string,
   authorName?: string
 };

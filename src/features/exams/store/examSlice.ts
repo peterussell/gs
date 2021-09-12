@@ -85,6 +85,7 @@ const examSlice = createSlice({
     // Single exam
     builder.addCase(fetchExamQuestions.pending, (state) => {
       state.loading = "pending";
+      state.questions = [];
     });
     builder.addCase(fetchExamQuestions.fulfilled, (state, { payload }) => {
       state.loading = "succeeded";
@@ -93,7 +94,7 @@ const examSlice = createSlice({
     });
     builder.addCase(fetchExamQuestions.rejected, (state) => {
       state.loading = "failed";
-      state.questions = []
+      state.questions = [];
     });
   },
 });

@@ -54,6 +54,7 @@ export const SubmitQuestionForm = () => {
     incorrectAnswer1: "",
     incorrectAnswer2: "",
     incorrectAnswer3: "",
+    syllabusReference: "",
     authorName: "",
     addAnother: true
   };
@@ -66,6 +67,7 @@ export const SubmitQuestionForm = () => {
     incorrectAnswer1: Yup.string().max(1000, "Max 1000 characters"),
     incorrectAnswer2: Yup.string().max(1000, "Max 1000 characters"),
     incorrectAnswer3: Yup.string().max(1000, "Max 1000 characters"),
+    syllabusReference: Yup.string().max(100, "Max 100 characters"),
     authorName: Yup.string().max(1000, "Max 1000 characters")
   });
 
@@ -178,6 +180,19 @@ export const SubmitQuestionForm = () => {
               </Grid>
               <Grid item xs={10}>
                 <TextFieldSet name="incorrectAnswer3" />
+              </Grid>
+            </Grid>
+
+            <Box mt={3} mb={3}>
+              <Divider />
+            </Box>
+
+            <Grid container spacing={2} alignItems="center">
+              <Grid item xs={2}>
+                <Typography variant="body1">Syllabus Reference</Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <TextFieldSet name="syllabusReference" />
               </Grid>
             </Grid>
 

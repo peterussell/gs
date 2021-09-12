@@ -139,7 +139,12 @@ export const ExamConfigurator = ({ exam, onCancel, onStartExam }: Props) => {
               <Button onClick={onCancel}>Cancel</Button>
             </Grid>
             <Grid item>
-              <Button color="primary" variant="outlined" onClick={handleStartExam}>
+              <Button
+                color="primary"
+                variant="outlined"
+                onClick={handleStartExam}
+                disabled={!numQuestions}
+              >
                 Start Exam
               </Button>
             </Grid>
