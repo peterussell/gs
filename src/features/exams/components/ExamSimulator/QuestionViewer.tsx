@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 
 import { ExamQuestion } from "models";
+import { useExamState } from "features/exams/store";
 import useStyles from "./examSimulatorStyle";
 
 interface Props {
@@ -17,11 +18,14 @@ interface Props {
 
 export const QuestionViewer = ({ question }: Props) => {
   const classes = useStyles();
+  const { setAnswer } = useExamState();
 
-  const [selectedAnswer, setSelectedAnswer] = useState("");
+  // const [selectedAnswer, setSelectedAnswer] = useState("");
 
   const handleSelectAnswer = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedAnswer((event.target as HTMLInputElement).value);
+    const newVal = parseInt((event.target as HTMLInputElement).value);
+    setAnswer(question.id, newVal);
+    // setSelectedAnswer((event.target as HTMLInputElement).value);
   };
 
   return (
@@ -33,12 +37,16 @@ export const QuestionViewer = ({ question }: Props) => {
       </Box>
 
       <Box mt={2} ml={3}>
-        <RadioGroup name="answers" value={selectedAnswer} onChange={handleSelectAnswer}>
+        <RadioGroup
+          name="answers"
+          value={`${question.selectedAnswerIndex}`}
+          onChange={handleSelectAnswer}
+        >
           <Grid container spacing={1}>
             {question.answers.map((a, i)=> (
               <Grid item xs={12} key={i}>
                 <FormControlLabel
-                  value={i}
+                  value={`${i}`}
                   control={
                     <Radio color="secondary" classes={{ root: classes.radio }} />
                   }

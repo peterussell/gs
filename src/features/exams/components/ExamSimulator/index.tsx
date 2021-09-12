@@ -16,7 +16,6 @@ export const ExamSimulator = () => {
 
   const {
     currentQuestionIndex,
-    exam,
     examQuestions,
     examConfig,
     loadExamQuestions,
@@ -47,7 +46,7 @@ export const ExamSimulator = () => {
     setShowResults(true);
   };
 
-  if (!examConfig) {
+  if (!examConfig?.exam) {
     return <Redirect push to="/exams" />
   }
 
@@ -55,13 +54,15 @@ export const ExamSimulator = () => {
     return <Redirect push to="/exams/results" />
   }
 
+  const { exam } = examConfig;
+
   return (
     !examQuestions?.length ? (
       <Typography variant="h5">Loading exam...</Typography>
     ) : (
       <>
         <Typography variant="h4">
-          {/* {`${capitalize(exam.licenseType)} ${exam.name}`} */}
+          {`${capitalize(exam.licenseType)} ${exam.name}`}
         </Typography>
 
         <Box mt={3}>

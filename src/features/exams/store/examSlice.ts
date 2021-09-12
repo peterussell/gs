@@ -23,7 +23,7 @@ export const fetchExamQuestions = createAsyncThunk(
   "exam/fetchExamQuestions",
   (config: ExamSimulatorConfig) => {
     return api.getExamQuestions({
-      examId: config.examId,
+      examId: config.exam.id,
       numberOfQuestions: config.numberOfQuestions
     })
       .then(({ data }) => data
@@ -51,8 +51,20 @@ const examSlice = createSlice({
   name: "exam",
   initialState,
   reducers: {
+    setAnswer(state, { payload }:
+      PayloadAction<{ questionId: string, answerIndex: number }>) {
+      if (!state.questions.length) { return; }
+      let q = state.questions.find(q => q.id === payload.questionId);
+      if (q) {
+        q.selectedAnswerIndex = payload.answerIndex;
+        q.status = "answered";
+      }
+    },
     setExamConfig(state, { payload }: PayloadAction<ExamSimulatorConfig>) {
       state.examConfig = payload;
+    },
+    setCurrentExam(state, { payload }: PayloadAction<Exam>) {
+      state.currentExam = payload
     },
     setCurrentQuestionIndex(state, { payload }: PayloadAction<number>) {
       state.currentQuestionIndex = payload;
@@ -87,6 +99,8 @@ const examSlice = createSlice({
 });
 
 export const {
+  setAnswer,
+  setCurrentExam,
   setCurrentQuestionIndex,
   setExamConfig
 } = examSlice.actions;

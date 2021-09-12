@@ -14,6 +14,7 @@ export const useGetQuestionsResponseMapper = (): Mapper<GetQuestionResponse, Exa
         { text: values.incorrectAnswer2, isCorrect: false },
         { text: values.incorrectAnswer3, isCorrect: false }
       ],
+      selectedAnswerIndex: -1,
       authorName: values.authorName,
       syllabusReference: values.syllabusReference,
       status: "unanswered",

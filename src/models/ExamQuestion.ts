@@ -5,7 +5,7 @@ export interface ExamQuestion {
   examId: string,
   text: string,
   answers: ExamAnswer[],
-  selectedAnswerIndex?: number,
+  selectedAnswerIndex: number,
   assetPaths?: string[],
   status: ExamQuestionStatus,
   authorName?: string,
