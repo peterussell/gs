@@ -8,6 +8,5 @@ export interface Exam {
   availableQuestions: number,
   aspeqName: string,
   aspeqExamInfo: ExamInfo,
-  currentExamInfo?: ExamInfo,
-  questions?: ExamQuestion[]
+  currentExamInfo?: ExamInfo
 };

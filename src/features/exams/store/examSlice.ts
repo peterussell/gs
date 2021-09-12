@@ -4,12 +4,9 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 
-import { Exam, ExamSimulatorConfig } from "models";
+import { Exam, ExamQuestion, ExamSimulatorConfig } from "models";
 import { ExamApi } from "api";
-
-import {
-  exam as mockExam
-} from "mocks"; // tmp
+import { useGetQuestionsResponseMapper } from "mappers/responseMappers";
 
 const api = new ExamApi();
 
@@ -22,10 +19,15 @@ export const fetchExams = createAsyncThunk(
   }
 );
 
-export const fetchExam = createAsyncThunk(
-  "exam/fetchExam",
+export const fetchExamQuestions = createAsyncThunk(
+  "exam/fetchExamQuestions",
   (config: ExamSimulatorConfig) => {
-    return mockExam;
+    return api.getExamQuestions({
+      examId: config.examId,
+      numberOfQuestions: config.numberOfQuestions
+    })
+      .then(({ data }) => data
+    );
   }
 );
 
@@ -33,12 +35,15 @@ export interface ExamState {
   exams?: Exam[],
   examConfig?: ExamSimulatorConfig,
   currentExam?: Exam,
+  questions: ExamQuestion[],
   currentQuestionIndex: number,
   loading: "idle" | "pending" | "succeeded" | "failed"
 };
 
 const initialState: ExamState = {
   currentQuestionIndex: 0,
+  currentExam: undefined,
+  questions: [],
   loading: "idle"
 };
 
@@ -66,15 +71,17 @@ const examSlice = createSlice({
       state.loading = "failed";
     });
     // Single exam
-    builder.addCase(fetchExam.pending, (state) => {
+    builder.addCase(fetchExamQuestions.pending, (state) => {
       state.loading = "pending";
     });
-    builder.addCase(fetchExam.fulfilled, (state, { payload }) => {
+    builder.addCase(fetchExamQuestions.fulfilled, (state, { payload }) => {
       state.loading = "succeeded";
-      state.currentExam = payload
+      const { map: mapQuestionResponse } = useGetQuestionsResponseMapper();
+      state.questions = payload.results.map(r => mapQuestionResponse(r));
     });
-    builder.addCase(fetchExam.rejected, (state) => {
+    builder.addCase(fetchExamQuestions.rejected, (state) => {
       state.loading = "failed";
+      state.questions = []
     });
   },
 });

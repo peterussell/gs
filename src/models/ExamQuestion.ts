@@ -2,10 +2,13 @@ import { ExamAnswer, ExamQuestionStatus } from ".";
 
 export interface ExamQuestion {
   id: string,
+  examId: string,
   text: string,
   answers: ExamAnswer[],
-  correctAnswerId: string,
-  selectedAnswerId?: string,
+  selectedAnswerIndex?: number,
   assetPaths?: string[],
-  status: ExamQuestionStatus
+  status: ExamQuestionStatus,
+  authorName?: string,
+  syllabusReference?: string,
+  addedDate: Date
 };

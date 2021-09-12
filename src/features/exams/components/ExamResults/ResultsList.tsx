@@ -6,13 +6,13 @@ import {
 import { ArrowBack, Check, Clear, HelpOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
-import { Exam } from "models";
+import { Exam, ExamQuestion } from "models";
 import { useExamUtils } from "utils";
 import useStyles from "./examResultsStyle";
 
-interface Props { exam: Exam };
+interface Props { exam: Exam, questions: ExamQuestion[] };
 
-export const ResultsList = ({ exam }: Props) => {
+export const ResultsList = ({ exam, questions }: Props) => {
   const classes = useStyles();
 
   const {
@@ -21,11 +21,11 @@ export const ResultsList = ({ exam }: Props) => {
     getUnansweredQuestions
   } = useExamUtils();
 
-  const correctAnswers = getCorrectAnswers(exam);
-  const incorrectAnswers = getIncorrectAnswers(exam);
-  const unansweredQuestions = getUnansweredQuestions(exam);
+  const correctAnswers = getCorrectAnswers(questions);
+  const incorrectAnswers = getIncorrectAnswers(questions);
+  const unansweredQuestions = getUnansweredQuestions(questions);
 
-  if (!exam.questions?.length) { return null; }
+  if (!exam || !questions?.length) { return null; }
 
   return (
     <>
@@ -53,14 +53,14 @@ export const ResultsList = ({ exam }: Props) => {
                           <Typography variant="body1">Your answer:</Typography>
                         </Grid>
                         <Grid item xs={10}>
-                          {q.answers.find(a => a.id === q.selectedAnswerId)?.text || "-"}
+                          {q.selectedAnswerIndex ? q.answers[q.selectedAnswerIndex].text : "-"}
                         </Grid>
                         <Grid item xs={2}>
                           <Typography variant="body1">Correct answer:</Typography>
                         </Grid>
                         <Grid item xs={10}>
                           <Typography variant="body1">
-                            {q.answers.find(a => a.id === q.correctAnswerId)?.text || "-"}
+                            {q.answers.find(a => a.isCorrect)?.text || "-"}
                           </Typography>
                         </Grid>
                       </Grid>
@@ -98,7 +98,7 @@ export const ResultsList = ({ exam }: Props) => {
                         </Grid>
                         <Grid item xs={10}>
                           <Typography variant="body1">
-                            {q.answers.find(a => a.id === q.correctAnswerId)?.text || "-"}
+                            {q.answers.find(a => a.isCorrect)?.text || "-"}
                           </Typography>
                         </Grid>
                       </Grid>
@@ -136,7 +136,7 @@ export const ResultsList = ({ exam }: Props) => {
                         </Grid>
                         <Grid item xs={10}>
                           <Typography variant="body1">
-                            {q.answers.find(a => a.id === q.correctAnswerId)?.text || "-"}
+                            {q.answers.find(a => a.isCorrect)?.text || "-"}
                           </Typography>
                         </Grid>
                       </Grid>

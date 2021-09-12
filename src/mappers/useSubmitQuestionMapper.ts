@@ -1,8 +1,8 @@
-import { FormMapper } from "./formMapper";
+import { Mapper } from "mappers/mapper";
 import { SubmitQuestionForm } from "models/forms";
 import { AddQuestionRequest } from "api/requests";
 
-export const useSubmitQuestionMapper = (): FormMapper<SubmitQuestionForm, AddQuestionRequest> => {
+export const useSubmitQuestionMapper = (): Mapper<SubmitQuestionForm, AddQuestionRequest> => {
   const map = (values: SubmitQuestionForm): AddQuestionRequest => {
     return {
       examId: values.examId,

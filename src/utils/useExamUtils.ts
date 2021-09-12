@@ -1,43 +1,43 @@
-import { Exam, ExamQuestion } from "models";
+import { ExamQuestion } from "models";
 
 export const useExamUtils = () => {
 
-  const getCorrectAnswers = (exam: Exam): ExamQuestion[] => {
-    if (!exam.questions?.length) { return [] };
-    return exam.questions.filter(q =>
+  const getCorrectAnswers = (questions: ExamQuestion[]): ExamQuestion[] => {
+    if (!questions?.length) { return [] };
+    return questions.filter(q =>
       q.status === "answered" &&
-      q.selectedAnswerId === q.correctAnswerId
+      q.selectedAnswerIndex === q.answers.findIndex(a => a.isCorrect)
     );
   };
 
-  const getIncorrectAnswers = (exam: Exam): ExamQuestion[] => {
-    if (!exam.questions?.length) { return [] };
-    return exam.questions.filter(q =>
+  const getIncorrectAnswers = (questions: ExamQuestion[]): ExamQuestion[] => {
+    if (!questions?.length) { return [] };
+    return questions.filter(q =>
       q.status === "answered" &&
-      q.selectedAnswerId !== q.correctAnswerId
+      q.selectedAnswerIndex !== q.answers.findIndex(a => a.isCorrect)
     );
   };
 
-  const getUnansweredQuestions = (exam: Exam): ExamQuestion[] => {
-    if (!exam.questions?.length) { return [] };
-    return exam.questions.filter(q => q.status === "unanswered");
+  const getUnansweredQuestions = (questions: ExamQuestion[]): ExamQuestion[] => {
+    if (!questions?.length) { return [] };
+    return questions.filter(q => q.status === "unanswered");
   };
 
   const getCorrectQuestionCount = (questions: ExamQuestion[]): number => {
     return questions.filter(q =>
-      q.selectedAnswerId === q.correctAnswerId
+      q.selectedAnswerIndex === q.answers.findIndex(a => a.isCorrect)
     ).length;
   };
 
-  const getScoreAsPercentage = (exam: Exam): number => {
-    if (!exam.questions?.length) { return 0; }
+  const getScoreAsPercentage = (questions: ExamQuestion[]): number => {
+    if (!questions?.length) { return 0; }
     return Math.round(
-      getCorrectQuestionCount(exam.questions) / exam.questions.length * 100
+      getCorrectQuestionCount(questions) / questions.length * 100
     );
   };
 
-  const isPass = (exam: Exam, requiredPercentage: number = 70): boolean => {
-    return getScoreAsPercentage(exam) > requiredPercentage;
+  const isPass = (questions: ExamQuestion[], requiredPercentage: number = 70): boolean => {
+    return getScoreAsPercentage(questions) > requiredPercentage;
   };
 
   return {

@@ -4,13 +4,13 @@ import {
   Typography
 } from "@material-ui/core";
 
-import { Exam } from "models";
+import { Exam, ExamQuestion } from "models";
 import { useExamUtils } from "utils";
 import useStyles from "./examResultsStyle";
 
-interface Props { exam: Exam };
+interface Props { exam: Exam, questions: ExamQuestion[] };
 
-export const ResultsSummary = ({ exam }: Props) => {
+export const ResultsSummary = ({ exam, questions }: Props) => {
   const classes = useStyles();
 
   const {
@@ -20,7 +20,7 @@ export const ResultsSummary = ({ exam }: Props) => {
     isPass
   } = useExamUtils();
 
-  if (!exam.questions?.length) { return null; }
+  if (!exam || !questions?.length) { return null; }
 
   return (
     <>
@@ -31,20 +31,20 @@ export const ResultsSummary = ({ exam }: Props) => {
             <Typography variant="body1">Total questions</Typography>
           </Grid>
           <Grid item xs={10}>
-            <Typography variant="body1">{exam.questions?.length}</Typography>
+            <Typography variant="body1">{questions?.length}</Typography>
           </Grid>
           <Grid item xs={2}>
             <Typography variant="body1">Unanswered</Typography>
           </Grid>
           <Grid item xs={10}>
-            <Typography variant="body1">{getUnansweredQuestions(exam).length}</Typography>
+            <Typography variant="body1">{getUnansweredQuestions(questions).length}</Typography>
           </Grid>
           <Grid item xs={2}>
             <Typography variant="body1">Score</Typography>
           </Grid>
           <Grid item xs={10}>
             <Typography variant="body1">
-              {getCorrectQuestionCount(exam.questions)}/{exam.questions?.length} ({getScoreAsPercentage(exam)}%)
+              {getCorrectQuestionCount(questions)}/{questions?.length} ({getScoreAsPercentage(questions)}%)
             </Typography>
           </Grid>
 
@@ -53,7 +53,7 @@ export const ResultsSummary = ({ exam }: Props) => {
           </Grid>
           <Grid item xs={10}>
             <Typography variant="body1" className={classes.bold}>
-              {isPass(exam) ? "Passed" : "Failed"}
+              {isPass(questions) ? "Passed" : "Failed"}
             </Typography>
           </Grid>
         </Grid>

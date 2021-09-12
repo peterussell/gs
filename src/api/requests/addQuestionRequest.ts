@@ -1,5 +1,3 @@
-import { Exam } from "models";
-
 export interface AddQuestionRequest {
   examId: string,
   question: string,

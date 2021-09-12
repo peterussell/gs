@@ -35,10 +35,10 @@ export const QuestionViewer = ({ question }: Props) => {
       <Box mt={2} ml={3}>
         <RadioGroup name="answers" value={selectedAnswer} onChange={handleSelectAnswer}>
           <Grid container spacing={1}>
-            {question.answers.map(a => (
-              <Grid item xs={12} key={a.id}>
+            {question.answers.map((a, i)=> (
+              <Grid item xs={12} key={i}>
                 <FormControlLabel
-                  value={a.id}
+                  value={i}
                   control={
                     <Radio color="secondary" classes={{ root: classes.radio }} />
                   }

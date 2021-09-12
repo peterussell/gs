@@ -1,4 +1,4 @@
 export interface ExamAnswer {
-  id: string,
-  text: string
+  text: string,
+  isCorrect: boolean
 };
