@@ -2,14 +2,10 @@ import axios, {
   AxiosError,
   AxiosInstance,
   AxiosPromise,
-  AxiosRequestConfig,
-  AxiosResponse,
+  AxiosRequestConfig
 } from "axios";
 
-export interface AxiosCallbackOptions<T> {
-  successCallback?: (response: AxiosResponse<T>) => void;
-  errorCallback?: (error: AxiosError<T>) => void;
-}
+export interface AxiosCallbackOptions<T> {}
 
 export abstract class ApiClient {
   private readonly api: AxiosInstance;

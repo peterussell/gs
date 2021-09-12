@@ -1,5 +1,7 @@
+import { Exam } from "models";
+
 export interface ExamSimulatorConfig {
-  examId: string,
+  exam: Exam,
   duration: number,
   isTimed: boolean,
   numberOfQuestions: number

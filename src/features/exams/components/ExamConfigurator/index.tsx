@@ -68,14 +68,14 @@ export const ExamConfigurator = ({ exam, onCancel, onStartExam }: Props) => {
 
   const handleStartExam = () => {
     onStartExam({
-      examId: exam.id,
+      exam: exam,
       duration: duration,
       isTimed: isTimed,
       numberOfQuestions: numQuestions
     });
   };
 
-  const cantSimText = "There aren't enough questions to simulate a full exam yet.";
+  const cantSimText = "There aren't enough questions to simulate a full exam.";
   return (
     <>
       <Grid container spacing={1} className={classes.bodyContainer}>
@@ -139,7 +139,12 @@ export const ExamConfigurator = ({ exam, onCancel, onStartExam }: Props) => {
               <Button onClick={onCancel}>Cancel</Button>
             </Grid>
             <Grid item>
-              <Button color="primary" variant="outlined" onClick={handleStartExam}>
+              <Button
+                color="primary"
+                variant="outlined"
+                onClick={handleStartExam}
+                disabled={!numQuestions}
+              >
                 Start Exam
               </Button>
             </Grid>

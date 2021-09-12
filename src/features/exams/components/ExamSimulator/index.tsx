@@ -16,9 +16,9 @@ export const ExamSimulator = () => {
 
   const {
     currentQuestionIndex,
-    exam,
+    examQuestions,
     examConfig,
-    loadExam,
+    loadExamQuestions,
     setCurrentQuestionIndex
   } = useExamState();
 
@@ -26,8 +26,8 @@ export const ExamSimulator = () => {
   const [showResults, setShowResults] = useState(false);
 
   useEffect(() => {
-    examConfig && loadExam(examConfig);
-  });
+    examConfig && loadExamQuestions(examConfig);
+  }, [examConfig]);
 
   const handleGoPrevious = () => {
     setCurrentQuestionIndex(currentQuestionIndex-1);
@@ -46,7 +46,7 @@ export const ExamSimulator = () => {
     setShowResults(true);
   };
 
-  if (!examConfig) {
+  if (!examConfig?.exam) {
     return <Redirect push to="/exams" />
   }
 
@@ -54,8 +54,10 @@ export const ExamSimulator = () => {
     return <Redirect push to="/exams/results" />
   }
 
+  const { exam } = examConfig;
+
   return (
-    !exam?.questions?.length ? (
+    !examQuestions?.length ? (
       <Typography variant="h5">Loading exam...</Typography>
     ) : (
       <>
@@ -65,7 +67,7 @@ export const ExamSimulator = () => {
 
         <Box mt={3}>
           <ProgressIndicator
-            questions={exam.questions}
+            questions={examQuestions}
             currentQuestionIndex={currentQuestionIndex}
             onQuestionChange={(newIndex: number) => { setCurrentQuestionIndex(newIndex); }}
           />
@@ -73,14 +75,14 @@ export const ExamSimulator = () => {
 
         <Box mt={4} className={classes.questionContainer}>
           <QuestionViewer
-            question={exam.questions[currentQuestionIndex]}
+            question={examQuestions[currentQuestionIndex]}
           />
         </Box>
 
         <Box mt={3}>
           <NavigationPanel
             canGoPrevious={currentQuestionIndex > 0}
-            canGoNext={currentQuestionIndex < exam.questions.length-1}
+            canGoNext={currentQuestionIndex < examQuestions.length-1}
             onGoPrevious={handleGoPrevious}
             onGoNext={handleGoNext}
             onFinish={handleFinish}

@@ -1,15 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCurrentQuestionIndex,
-  selectExam,
+  selectExamQuestions,
   selectExams,
   selectExamConfig
 } from "./examSelectors";
 import {
-  fetchExam,
   fetchExams,
+  fetchExamQuestions,
+  setAnswer,
   setCurrentQuestionIndex,
-  setExamConfig
+  setExamConfig,
 } from "./examSlice";
 
 import { ExamSimulatorConfig } from "models";
@@ -18,16 +19,20 @@ export const useExamState = () => {
   const dispatch = useDispatch();
 
   const currentQuestionIndex = useSelector(selectCurrentQuestionIndex);
-  const exam = useSelector(selectExam);
+  const examQuestions = useSelector(selectExamQuestions);
   const exams = useSelector(selectExams);
   const examConfig = useSelector(selectExamConfig);
 
-  const dispatchLoadExam = (config: ExamSimulatorConfig) => {
-    dispatch(fetchExam(config));
-  };
-
   const dispatchLoadExams = () => {
     dispatch(fetchExams());
+  };
+
+  const dispatchLoadExamQuestions = (config: ExamSimulatorConfig) => {
+    dispatch(fetchExamQuestions(config));
+  };
+
+  const dispatchSetAnswer = (questionId: string, answerIndex: number) => {
+    dispatch(setAnswer({ questionId, answerIndex }));
   };
 
   const dispatchSetCurrentQuestionIndex = (newIndex: number) => {
@@ -40,11 +45,12 @@ export const useExamState = () => {
 
   return {
     currentQuestionIndex,
-    exam,
+    examQuestions,
     exams,
     examConfig,
-    loadExam: dispatchLoadExam,
     loadExams: dispatchLoadExams,
+    loadExamQuestions: dispatchLoadExamQuestions,
+    setAnswer: dispatchSetAnswer,
     setCurrentQuestionIndex: dispatchSetCurrentQuestionIndex,
     setExamConfig: dispatchSetExamConfig
   };

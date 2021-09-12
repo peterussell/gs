@@ -9,9 +9,9 @@ import { useStringUtils } from "utils";
 export const ExamResults = () => {
   const { capitalize } = useStringUtils();
 
-  const { exam } = useExamState();
+  const { examConfig, examQuestions } = useExamState();
 
-  if (!exam?.questions?.length) {
+  if (!examConfig?.exam || !examQuestions?.length) {
     return (
       <>
       <Typography variant="body1">No exam found.</Typography>
@@ -22,14 +22,16 @@ export const ExamResults = () => {
     )
   }
 
+  const { exam } = examConfig;
+
   return (
     <>
       <Typography variant="h4">
         {`${capitalize(exam.licenseType)} ${exam.name}`} - Results
       </Typography>
 
-      <ResultsSummary exam={exam} />
-      <ResultsList exam={exam} />
+      <ResultsSummary exam={exam} questions={examQuestions} />
+      <ResultsList exam={exam} questions={examQuestions} />
     </>
   );
 };
