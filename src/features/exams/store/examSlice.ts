@@ -7,6 +7,7 @@ import {
 import { Exam, ExamQuestion, ExamSimulatorConfig } from "models";
 import { ExamApi } from "api";
 import { useGetQuestionsResponseMapper } from "mappers/responseMappers";
+import { useArrayUtils } from "utils";
 
 const api = new ExamApi();
 
@@ -61,10 +62,8 @@ const examSlice = createSlice({
       }
     },
     setExamConfig(state, { payload }: PayloadAction<ExamSimulatorConfig>) {
+      state.currentQuestionIndex = 0;
       state.examConfig = payload;
-    },
-    setCurrentExam(state, { payload }: PayloadAction<Exam>) {
-      state.currentExam = payload
     },
     setCurrentQuestionIndex(state, { payload }: PayloadAction<number>) {
       state.currentQuestionIndex = payload;
@@ -88,9 +87,13 @@ const examSlice = createSlice({
       state.questions = [];
     });
     builder.addCase(fetchExamQuestions.fulfilled, (state, { payload }) => {
-      state.loading = "succeeded";
       const { map: mapQuestionResponse } = useGetQuestionsResponseMapper();
-      state.questions = payload.results.map(r => mapQuestionResponse(r));
+      const { shuffle } = useArrayUtils();
+
+      state.loading = "succeeded";
+      let questions = payload.results.map(r => mapQuestionResponse(r));
+      shuffle(questions);
+      state.questions = questions;
     });
     builder.addCase(fetchExamQuestions.rejected, (state) => {
       state.loading = "failed";
@@ -101,7 +104,6 @@ const examSlice = createSlice({
 
 export const {
   setAnswer,
-  setCurrentExam,
   setCurrentQuestionIndex,
   setExamConfig
 } = examSlice.actions;
