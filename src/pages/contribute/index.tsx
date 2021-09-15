@@ -1,5 +1,6 @@
 import { Container } from "@material-ui/core";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 import {
   SubmitQuestion,
@@ -12,11 +13,17 @@ export const ContributePage = () => {
   const { path } = useRouteMatch();
 
   return (
-    <Container maxWidth="md" className={classes.bodyContainer}>
-      <Switch>
-        <Route path={path} component={SubmitQuestion} exact />
-        <Route path={`${path}/success`} component={SubmitSuccess} />
-      </Switch>
-    </Container>
+    <>
+      <Helmet>
+        <title>Contribute | GroundSchool NZ</title>
+      </Helmet>
+
+      <Container maxWidth="md" className={classes.bodyContainer}>
+        <Switch>
+          <Route path={path} component={SubmitQuestion} exact />
+          <Route path={`${path}/success`} component={SubmitSuccess} />
+        </Switch>
+      </Container>
+    </>
   );
 };
