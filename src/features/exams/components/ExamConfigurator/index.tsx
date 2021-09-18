@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   Grid,
   Switch,
   TextField,
-  Tooltip,
   Typography
 } from "@material-ui/core";
 
@@ -27,6 +26,11 @@ export const ExamConfigurator = ({ exam, onCancel, onStartExam }: Props) => {
   const [isTimed, setIsTimed] = useState(true);
   const [duration, setDuration] = useState(exam.aspeqExamInfo.durationMinutes);
   const [numQuestionsError, setNumQuestionsError] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Update the duration based on the number of available questions
+    updateDuration(numQuestions);
+  }, [exam.aspeqExamInfo]);
 
   const handleSimulateExamChange = (e: any) => {
     const simulate = e.target.checked;
@@ -75,14 +79,13 @@ export const ExamConfigurator = ({ exam, onCancel, onStartExam }: Props) => {
     });
   };
 
-  const cantSimText = "There aren't enough questions to simulate a full exam.";
   return (
     <>
-      <Grid container spacing={1} className={classes.bodyContainer}>
-        <Grid item xs={4}>
+      <Grid container spacing={2} className={classes.bodyContainer}>
+        <Grid item xs={12} md={4}>
           <Typography variant="body1">Simulate real exam</Typography>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12} md={8}>
           <Switch
             checked={simulateAspeq}
             onChange={handleSimulateExamChange}
@@ -91,18 +94,16 @@ export const ExamConfigurator = ({ exam, onCancel, onStartExam }: Props) => {
             disabled={!canSimulateAspeqExam}
           />
           {!canSimulateAspeqExam && (
-            <Tooltip title={cantSimText}>
-              <Typography variant="body2" className={`${classes.hintText} ${classes.cursor}`}>
-                Why is this disabled?
-              </Typography>
-            </Tooltip>
+            <Typography variant="body2" className={classes.hintText}>
+              Not enough questions to simulate a real exam
+            </Typography>
           )}
         </Grid>
 
-        <Grid item xs={4}>
+        <Grid item xs={12} md={4}>
           <Typography variant="body1">Number of questions</Typography>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12} md={8}>
           <TextField
             variant="outlined"
             className={classes.numQuestionsInput}
@@ -115,10 +116,10 @@ export const ExamConfigurator = ({ exam, onCancel, onStartExam }: Props) => {
           />
         </Grid>
 
-        <Grid item xs={4}>
+        <Grid item xs={12} md={4}>
           <Typography variant="body1">Timed</Typography>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12} md={8}>
           <Switch
             checked={isTimed}
             onChange={handleIsTimedChange}
@@ -128,12 +129,26 @@ export const ExamConfigurator = ({ exam, onCancel, onStartExam }: Props) => {
           />
           {isTimed && (
             <Typography variant="body2" className={classes.hintText}>
-              ({numQuestions} questions, {duration} minutes)
+              {numQuestions} questions, {duration} minutes<br />
             </Typography>
           )}
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} md={4}>{/* Spacer */}
+        </Grid>
+        <Grid item xs={12} md={8}>
+          <Typography
+            variant="body2"
+            className={classes.hintText}
+            style={{ marginLeft: 0, color: "#777" }}
+          >
+            (Aspeq exam:&nbsp;
+            {exam.aspeqExamInfo.numberOfQuestions} questions,&nbsp;
+            {exam.aspeqExamInfo.durationMinutes} minutes)
+          </Typography>
+        </Grid>
+
+        <Grid item xs={12} md={12}>
           <Grid container spacing={2} justify="flex-end" className={classes.actionsContainer}>
             <Grid item>
               <Button onClick={onCancel}>Cancel</Button>
