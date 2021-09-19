@@ -16,13 +16,15 @@ export const theme = createMuiTheme({
       light: "#ddd"
     },
     success: {
-      main: "#53a653"
+      main: "#53a653",
+      dark: "#05b169"
     },
     warning: {
-      main: "#0e0" // placeholder
+      main: "#ffaa00"
     },
     error: {
-      main: "#c00"
+      main: "#c00",
+      dark: "#df5f67"
     },
     text: {
       primary: "#333",

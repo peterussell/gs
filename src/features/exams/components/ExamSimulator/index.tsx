@@ -3,6 +3,7 @@ import { Box, Typography } from "@material-ui/core";
 
 import { Redirect } from "react-router-dom";
 import { ProgressIndicator } from "./ProgressIndicator";
+import { TimerPanel } from "./TimerPanel";
 import { QuestionViewer } from "./QuestionViewer";
 import { NavigationPanel } from "./NavigationPanel";
 import { useExamState } from "features/exams/store";
@@ -86,6 +87,13 @@ export const ExamSimulator = () => {
             onGoPrevious={handleGoPrevious}
             onGoNext={handleGoNext}
             onFinish={handleFinish}
+          />
+        </Box>
+
+        <Box mt={2}>
+          <TimerPanel
+            allowedTimeMinutes={examConfig.duration}
+            onTimerExpired={handleFinishConfirm}
           />
         </Box>
 

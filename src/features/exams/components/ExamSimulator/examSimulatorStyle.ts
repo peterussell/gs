@@ -28,10 +28,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingTop: theme.spacing(1)
   },
   radio: {
-    color: "#ccc"
+    color: "#ccc !important"
   },
-  checkbox: {
-    color: "#ccc"
+  progressOk: {
+    backgroundColor: `${theme.palette.success.dark} !important`
+  },
+  progressWarn: {
+    backgroundColor: `${theme.palette.warning.main} !important`
+  },
+  progressStrongWarn: {
+    backgroundColor: `${theme.palette.error.main} !important`
   }
 }));
 
