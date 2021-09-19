@@ -9,7 +9,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   bodyContainer: {
     alignItems: "center",
-    marginLeft: theme.spacing(2)
   },
   switch: {
     marginLeft: -11

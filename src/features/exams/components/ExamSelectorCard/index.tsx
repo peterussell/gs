@@ -44,7 +44,7 @@ export const ExamSelectorCard = ({ exam, onClick }: Props) => {
               <Grid item xs={12}>
                 <School className={classes.icon} />
                 <Typography variant="body2" color="secondary">
-                  Exam: {exam.aspeqExamInfo.durationMinutes} min / {exam.aspeqExamInfo.numberOfQuestions} questions
+                  Exam: {exam.aspeqExamInfo.numberOfQuestions} questions / {exam.aspeqExamInfo.durationMinutes} min
                 </Typography>
               </Grid>
             </Grid>

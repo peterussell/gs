@@ -68,7 +68,7 @@ export const ExamSelector = () => {
     return (
       <Grid container spacing={4}>
         {matchingExams.map((e: Exam) => (
-          <Grid item xs={4} key={e.id}>
+          <Grid item xs={12} sm={6} md={4} key={e.id}>
             <ExamSelectorCard exam={e} onClick={(e: Exam) => { handleCardClick(e); }} />
           </Grid>
         ))}
