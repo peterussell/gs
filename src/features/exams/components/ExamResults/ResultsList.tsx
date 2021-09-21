@@ -54,7 +54,7 @@ export const ResultsList = ({ exam, questions }: Props) => {
                         </Grid>
                         <Grid item xs={10}>
                           <Typography variant="body1">
-                            {q.selectedAnswerIndex ? q.answers[q.selectedAnswerIndex].text : "-"}
+                            {(q.selectedAnswerIndex !== -1) ? q.answers[q.selectedAnswerIndex].text : "-"}
                           </Typography>
                         </Grid>
                         <Grid item xs={2}>
