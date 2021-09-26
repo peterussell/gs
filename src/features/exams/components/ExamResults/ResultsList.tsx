@@ -65,6 +65,14 @@ export const ResultsList = ({ exam, questions }: Props) => {
                             {q.answers.find(a => a.isCorrect)?.text || "-"}
                           </Typography>
                         </Grid>
+                        <Grid item xs={2}>
+                          <Typography variant="body1">Syllabus Ref:</Typography>
+                        </Grid>
+                        <Grid item xs={10}>
+                          <Typography variant="body1">
+                            {q.syllabusReference || "-"}
+                          </Typography>
+                        </Grid>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -103,6 +111,14 @@ export const ResultsList = ({ exam, questions }: Props) => {
                             {q.answers.find(a => a.isCorrect)?.text || "-"}
                           </Typography>
                         </Grid>
+                        <Grid item xs={2}>
+                          <Typography variant="body1">Syllabus Ref:</Typography>
+                        </Grid>
+                        <Grid item xs={10}>
+                          <Typography variant="body1">
+                            {q.syllabusReference || "-"}
+                          </Typography>
+                        </Grid>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -139,6 +155,14 @@ export const ResultsList = ({ exam, questions }: Props) => {
                         <Grid item xs={10}>
                           <Typography variant="body1">
                             {q.answers.find(a => a.isCorrect)?.text || "-"}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                          <Typography variant="body1">Syllabus Ref:</Typography>
+                        </Grid>
+                        <Grid item xs={10}>
+                          <Typography variant="body1">
+                            {q.syllabusReference || "-"}
                           </Typography>
                         </Grid>
                       </Grid>
